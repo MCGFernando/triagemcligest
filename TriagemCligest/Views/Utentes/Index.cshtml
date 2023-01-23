@@ -1,0 +1,317 @@
+﻿@model IEnumerable<TriagemCligest.Models.Utente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDUtenteExterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDEstatuto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDTitular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naturalidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalTrabalho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataActualização)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFimContrato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAberturaFicha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UltimaConsultaFicha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeTitular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDRazao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDFuncionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaClinica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Confirmado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrupoSanguineo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alergias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Raca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Peso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Altura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nacionalidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIUpload)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoUpload)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIDataUploadFirst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIDataUploadLast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoDataUploadFirst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoDataUploadLast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIIDUploadFirst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIIDUploadLast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoIDUploadFirst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartaoIDUploadLast)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDUtenteExterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDEstatuto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDTitular)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naturalidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalTrabalho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataActualização)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFimContrato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAberturaFicha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UltimaConsultaFicha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeTitular)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDRazao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDFuncionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaClinica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Confirmado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoSanguineo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alergias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Peso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Altura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nacionalidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIUpload)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoUpload)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIDataUploadFirst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIDataUploadLast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoDataUploadFirst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoDataUploadLast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIIDUploadFirst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIIDUploadLast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoIDUploadFirst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartaoIDUploadLast)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

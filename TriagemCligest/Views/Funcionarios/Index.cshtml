@@ -1,0 +1,257 @@
+﻿@model IEnumerable<TriagemCligest.Models.Funcionario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDUtente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NdeFuncionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoTrabalhador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstatutoTrabalhador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAbreviado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContratoN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContaBancaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Escalao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsabilidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CentroCusto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Receitar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAdmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSaida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Local)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NdeBeneficiarioFiscal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NdeSegurancaSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoletimSanidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VencimentoReal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VencimentoBaseKZR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasUteis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NdeCC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MapaInterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDUtente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NdeFuncionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoTrabalhador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstatutoTrabalhador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAbreviado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContratoN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaBancaria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Escalao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsabilidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CentroCusto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receitar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAdmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NdeBeneficiarioFiscal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NdeSegurancaSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoletimSanidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VencimentoReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VencimentoBaseKZR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiasUteis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NdeCC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MapaInterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

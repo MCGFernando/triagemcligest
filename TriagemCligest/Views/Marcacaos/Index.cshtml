@@ -1,0 +1,161 @@
+﻿@model IEnumerable<TriagemCligest.Models.Marcacao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCentro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDutente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Realizado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDfuncionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CODEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Entidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Encerrada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefoneContacto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaEpisodio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDFE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCentro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDutente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Realizado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDfuncionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CODEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Encerrada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefoneContacto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaEpisodio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDFE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posto)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
