@@ -51,6 +51,7 @@ namespace TriagemCligest.Controllers
         {
             //ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID");
             //ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID");
+
             return View();
         }
 

@@ -5,6 +5,5 @@
         NORMAL = 0,
         HIPOTERMIA = 1, 
         HIPERTERMIA = 2,
-        ERROR = 3
     }
 }

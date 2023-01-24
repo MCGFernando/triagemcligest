@@ -2,8 +2,9 @@
 {
     public enum ClassificacaoExpectoracao : int
     {
-        VERDE = 0,
-        BRANCA = 1,
-        AMARELA = 2
+        NONE = 0,
+        VERDE = 1,
+        BRANCA = 2,
+        AMARELA = 3
     }
 }

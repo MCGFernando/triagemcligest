@@ -2,8 +2,9 @@
 {
     public enum ClassificacaoQueimadura : int
     {
-        PRIMEIRO_GRAU = 0,   
-        SEGUNDO_GRAU = 1,
-        TERCEIRO_GRAU = 2
+        NONE = 0,
+        PRIMEIRO_GRAU = 1,   
+        SEGUNDO_GRAU = 2,
+        TERCEIRO_GRAU = 3
     }
 }

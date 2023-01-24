@@ -2,7 +2,8 @@
 {
     public enum  ClassificacaoColoracaoPele : int
     {
-        CORADO = 0,
-        HIPOCORADO = 1
+        NONE = 0,
+        CORADO = 1,
+        HIPOCORADO = 2
     }
 }

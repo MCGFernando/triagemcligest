@@ -1,52 +1,94 @@
 ﻿@model TriagemCligest.Models.Triagem
-<div class="form-group">
-    <label asp-for="SemanaGravidez" class="control-label"></label>
-    <input asp-for="SemanaGravidez" class="form-control" />
-    <span asp-validation-for="SemanaGravidez" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-4">
+        <div class="form-group">
+            <label asp-for="SemanaGravidez" class="control-label"></label>
+            <input asp-for="SemanaGravidez" class="form-control" />
+            <span asp-validation-for="SemanaGravidez" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="Alergia" class="control-label"></label>
-    <input asp-for="Alergia" class="form-control" />
-    <span asp-validation-for="Alergia" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Alergia" class="control-label"></label>
+            <input asp-for="Alergia" class="form-check-input" />
+            <span asp-validation-for="Alergia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="DescricaoAlergia" class="control-label"></label>
+            <input asp-for="DescricaoAlergia" class="form-control" />
+            <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Medicamento" class="control-label"></label>
+            <input asp-for="Medicamento" class="form-check-input" />
+            <span asp-validation-for="Medicamento" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="DescricaoMedicamento" class="control-label"></label>
+            <input asp-for="DescricaoMedicamento" class="form-control" />
+            <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="DescricaoAlergia" class="control-label"></label>
-    <input asp-for="DescricaoAlergia" class="form-control" />
-    <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-4">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="ContracaoUterina" /> @Html.DisplayNameFor(model => model.ContracaoUterina)
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Hiperemese" /> @Html.DisplayNameFor(model => model.Hiperemese)
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Desidratacao" /> @Html.DisplayNameFor(model => model.Desidratacao)
+            </label>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="Medicamento" class="control-label"></label>
-    <input asp-for="Medicamento" class="form-control" />
-    <input asp-for="Medicamento" class="form-control" />
-    <span asp-validation-for="Medicamento" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-4">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="AbcessoMamario" /> @Html.DisplayNameFor(model => model.AbcessoMamario)
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IngurgitamentoMamario" /> @Html.DisplayNameFor(model => model.IngurgitamentoMamario)
+            </label>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="DescricaoMedicamento" class="control-label"></label>
-    <input asp-for="DescricaoMedicamento" class="form-control" />
-    <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="ContracaoUterina" /> @Html.DisplayNameFor(model => model.ContracaoUterina)
-    </label>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="Hiperemese" /> @Html.DisplayNameFor(model => model.Hiperemese)
-    </label>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="Desidratacao" /> @Html.DisplayNameFor(model => model.Desidratacao)
-    </label>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="AbcessoMamario" /> @Html.DisplayNameFor(model => model.AbcessoMamario)
-    </label>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="IngurgitamentoMamario" /> @Html.DisplayNameFor(model => model.IngurgitamentoMamario)
-    </label>
-</div>
+
+
+
+
+
+
+
+
+
+
+
