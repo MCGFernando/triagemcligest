@@ -2,7 +2,7 @@
 {
     public class SessionValidationMiddleware : IMiddleware
     {
-        /*private readonly IHttpContextAccessor _httpContextAccessor;
+       /* private readonly IHttpContextAccessor _httpContextAccessor;
 
         public SessionValidationMiddleware(IHttpContextAccessor httpContextAccessor)
         {

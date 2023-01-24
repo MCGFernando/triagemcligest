@@ -2,7 +2,9 @@
 {
     public enum ClassificacaoFrequenciaRespiratoria : int
     {
-        EUPNEICO = 0,
-        DISPNEICO = 1,
+        NORMAL = 0,
+        EUPNEICO = 1,
+        DISPNEICO = 2,
+        NONE = 3,
     }
 }

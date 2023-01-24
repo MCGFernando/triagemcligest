@@ -1,0 +1,61 @@
+﻿@model TriagemCligest.Models.Triagem
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Gravidez" /> @Html.DisplayNameFor(model => model.Gravidez)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="MedicoAssistente" class="control-label"></label>
+    <input asp-for="MedicoAssistente" class="form-control" />
+    <span asp-validation-for="MedicoAssistente" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Medicamento" class="control-label"></label>
+    <input asp-for="Medicamento" class="form-control" />
+    <span asp-validation-for="Medicamento" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="DescricaoMedicamento" class="control-label"></label>
+    <input asp-for="DescricaoMedicamento" class="form-control" />
+    <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="AtrasoMenstrual" /> @Html.DisplayNameFor(model => model.AtrasoMenstrual)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Mioma" /> @Html.DisplayNameFor(model => model.Mioma)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="QuistosOvarios" /> @Html.DisplayNameFor(model => model.QuistosOvarios)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Metrorragia" /> @Html.DisplayNameFor(model => model.Metrorragia)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Dismenorreia" /> @Html.DisplayNameFor(model => model.Dismenorreia)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="CorrimentoVaginal" /> @Html.DisplayNameFor(model => model.CorrimentoVaginal)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="CaracteristicaCorrimentoVaginal" class="control-label"></label>
+    <input asp-for="CaracteristicaCorrimentoVaginal" class="form-control" />
+    <span asp-validation-for="CaracteristicaCorrimentoVaginal" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="PruridoVaginal" /> @Html.DisplayNameFor(model => model.PruridoVaginal)
+    </label>
+</div>

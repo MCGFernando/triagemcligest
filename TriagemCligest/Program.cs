@@ -6,6 +6,8 @@ using TriagemCligest.Service;
 using TriagemCligest.Session;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TriagemContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TriagemContext") ?? throw new InvalidOperationException("Connection string 'TriagemContext' not found.")));
 builder.Services.AddDbContext<CligestUContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CligestUContext") ?? throw new InvalidOperationException("Connection string 'CligestUContext' not found.")));
 builder.Services.AddDbContext<CligestSIContext>(options =>

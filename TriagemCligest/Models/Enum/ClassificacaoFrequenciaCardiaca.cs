@@ -4,6 +4,7 @@
     {
         NORMOCARDICO = 0,
         BRADICARDICO = 1,
-        TAQUICARDICO = 2
+        TAQUICARDICO = 2,
+        NONE = 3
     }
 }

@@ -1,0 +1,437 @@
+﻿@model IEnumerable<TriagemCligest.Models.Triagem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marcacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoTriagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SituacaoQueixa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TensaoArterialSitolica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TensaoArterialDiastolica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoTemperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Peso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrequeciaCardiaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoFrequenciaCardiaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrequeciaRespiratoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoFrequenciaRespiratoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patologia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoPatologia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alergia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoAlergia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medicamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoMedicamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoPeleMucosa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ictericia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LesaoCutanea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoQueimadura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalQueimadura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Epistaxe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cianose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tosse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expectoracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoExpectoracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaturacaoOxigenio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalCianose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoGenitoUrinario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Metrorragia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dismenorreia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecrecaoUretralVaginal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hematemese)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vomito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Melena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enterorragia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Obstipacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diarreia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AtrasoMenstrual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mioma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuistosOvarios)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrimentoVaginal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaracteristicaCorrimentoVaginal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PruridoVaginal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gravidez)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicoAssistente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemanaGravidez)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContracaoUterina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hiperemese)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desidratacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbcessoMamario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IngurgitamentoMamario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DispneiaMusculaturaAcessoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SangramentoNasal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FezesSangue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrinaComSangue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DorMiccao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoColoracaoPele)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoDiurese)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatarRgisto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraChegada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraAtendimentoMedico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraAcolhimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassificacaoTriagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoTriagem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utente.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marcacao.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoTriagem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SituacaoQueixa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TensaoArterialSitolica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TensaoArterialDiastolica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoTemperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Peso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequeciaCardiaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoFrequenciaCardiaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequeciaRespiratoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoFrequenciaRespiratoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patologia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoPatologia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alergia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoAlergia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medicamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoMedicamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoPeleMucosa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ictericia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LesaoCutanea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoQueimadura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalQueimadura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epistaxe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cianose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tosse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expectoracao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoExpectoracao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaturacaoOxigenio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalCianose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoGenitoUrinario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Metrorragia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dismenorreia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecrecaoUretralVaginal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hematemese)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vomito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Melena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enterorragia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obstipacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diarreia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtrasoMenstrual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mioma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuistosOvarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrimentoVaginal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaracteristicaCorrimentoVaginal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PruridoVaginal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gravidez)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicoAssistente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemanaGravidez)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContracaoUterina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hiperemese)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desidratacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbcessoMamario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngurgitamentoMamario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispneiaMusculaturaAcessoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SangramentoNasal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FezesSangue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrinaComSangue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DorMiccao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoColoracaoPele)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoDiurese)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatarRgisto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraChegada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraAtendimentoMedico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraAcolhimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoTriagem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoTriagem)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -11,6 +11,10 @@
     "mssql3": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:CligestUContext"
+    },
+    "mssql4": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:TriagemContext"
     }
   }
 }
