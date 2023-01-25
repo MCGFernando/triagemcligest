@@ -28,21 +28,18 @@ namespace TriagemCligest.Controllers
         // GET: Triagems
         public async Task<IActionResult> Index()
         {
-            
-                var queryTriagem = from t in _context.Triagem.ToList() select t;
-                var queryUtente = from u in _contextUtente.FindAll() select u;
-                var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID select new { a, b };
-            List<Triagem> tt = new List<Triagem>();
+
+            var queryTriagem = from t in _context.Triagem.ToList() select t;
+            var queryUtente = from u in _contextUtente.FindAll() select u;
+            var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID select new { a, b };
+            List<Triagem> lstTriagem = new List<Triagem>();
             foreach (var item in result)
             {
-                Triagem ttt = item.a;
-                ttt.Utente = item.b;
-                tt.Add(ttt);
+                Triagem triagem = item.a;
+                triagem.Utente = item.b;
+                lstTriagem.Add(triagem);
             }
-
-
-            var triagemContext = _context.Triagem;
-            return View(tt);
+            return View(lstTriagem);
         }
 
         // GET: Triagems/Details/5
@@ -53,14 +50,21 @@ namespace TriagemCligest.Controllers
                 return NotFound();
             }
 
-            var triagem = await _context.Triagem
+            /*var triagem = await _context.Triagem
                 .Include(t => t.Marcacao)
                 .Include(t => t.Utente)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);*/
+
+            var queryTriagem = from t in _context.Triagem.ToList() select t;
+            var queryUtente = from u in _contextUtente.FindAll() select u;
+            var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
+            //result = result.Where(qt => qt.a.Id == id.Value);
+            Triagem triagem = result.Select(x =>x.a).FirstOrDefault();
             if (triagem == null)
             {
                 return NotFound();
             }
+            triagem.Utente = result.Select(x => x.b).FirstOrDefault();
 
             return View(triagem);
         }
