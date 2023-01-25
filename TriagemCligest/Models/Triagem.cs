@@ -27,27 +27,27 @@ namespace TriagemCligest.Models
         public int FrequeciaRespiratoria { get; set; }
         public ClassificacaoFrequenciaRespiratoria ClassificacaoFrequenciaRespiratoria { get; set; }
         /*************************FIM DADOS VITAIS*****************************/
-        public bool? Patologia { get; set; } = false;
+        public bool Patologia { get; set; } = false;
         public String? DescricaoPatologia { get; set; }
-        public bool? Alergia { get; set; } = false;
+        public bool Alergia { get; set; } = false;
         public String? DescricaoAlergia { get; set; }
-        public bool? Medicamento { get; set; } = false;
+        public bool Medicamento { get; set; } = false;
         public String? DescricaoMedicamento { get; set; }
 
         /*************************PELE E MUCOSA*****************************/
         public ClassificacaoPeleMucosa? ClassificacaoPeleMucosa { get; set; }
 
-        public bool? Ictericia { get; set; } = false;
+        public bool Ictericia { get; set; } = false;
         public String? LesaoCutanea { get; set; }
         public ClassificacaoQueimadura? ClassificacaoQueimadura { get; set; }
         public String? LocalQueimadura { get; set; }
         /*************************FIM PELE E MUCOSA*****************************/
 
         /*************************RESPIRATORIO*****************************/
-        public bool? Epistaxe { get; set; } = false;
-        public bool? Cianose { get; set; } = false;
-        public bool? Tosse { get; set; } = false;
-        public bool? Expectoracao { get; set; } = false;
+        public bool Epistaxe { get; set; } = false;
+        public bool Cianose { get; set; } = false;
+        public bool Tosse { get; set; } = false;
+        public bool Expectoracao { get; set; } = false;
         public ClassificacaoExpectoracao? ClassificacaoExpectoracao { get; set; }
         public double? SaturacaoOxigenio { get; set; }
         public string? LocalCianose { get; set; }
@@ -70,31 +70,31 @@ namespace TriagemCligest.Models
         /*************************FIM GASTROINTESTINAL*****************************/
 
         /*************************TRIAGEM GINECOLOGIA*****************************/
-        public bool? AtrasoMenstrual { get; set; } = false;
-        public bool? Mioma { get; set; } = false;
-        public bool? QuistosOvarios { get; set; } = false;
-        public bool? CorrimentoVaginal { get; set; } = false;
+        public bool AtrasoMenstrual { get; set; } = false;
+        public bool Mioma { get; set; } = false;
+        public bool QuistosOvarios { get; set; } = false;
+        public bool CorrimentoVaginal { get; set; } = false;
         public string? CaracteristicaCorrimentoVaginal { get; set; }
-        public bool? PruridoVaginal { get; set; } = false;
-        public bool? Gravidez { get; set; } = false;
+        public bool PruridoVaginal { get; set; } = false;
+        public bool Gravidez { get; set; } = false;
         public string? MedicoAssistente { get; set; }
         /*************************FIM TRIAGEM GINECOLOGIA*****************************/
 
         /*************************TRIAGEM OBSTERICIA*****************************/
         public double? SemanaGravidez { get; set; }
-        public bool? ContracaoUterina { get; set; } = false;
-        public bool? Hiperemese { get; set; } = false;
-        public bool? Desidratacao { get; set; } = false;
-        public bool? AbcessoMamario { get; set; } = false;
-        public bool? IngurgitamentoMamario { get; set; } = false;
+        public bool ContracaoUterina { get; set; } = false;
+        public bool Hiperemese { get; set; } = false;
+        public bool Desidratacao { get; set; } = false;
+        public bool AbcessoMamario { get; set; } = false;
+        public bool IngurgitamentoMamario { get; set; } = false;
         /*************************FIM TRIAGEM OBSTERICIA*****************************/
 
         /*************************TRIAGEM PEDIATRIA*****************************/
-        public bool? DispneiaMusculaturaAcessoria { get; set; } = false;
-        public bool? SangramentoNasal { get; set; } = false;
-        public bool? FezesSangue { get; set; } = false;
-        public bool? UrinaComSangue { get; set; } = false;
-        public bool? DorMiccao { get; set; } = false;
+        public bool DispneiaMusculaturaAcessoria { get; set; } = false;
+        public bool SangramentoNasal { get; set; } = false;
+        public bool FezesSangue { get; set; } = false;
+        public bool UrinaComSangue { get; set; } = false;
+        public bool DorMiccao { get; set; } = false;
         public ClassificacaoColoracaoPele? ClassificacaoColoracaoPele { get; set; }
         public ClassificacaoDiurese? ClassificacaoDiurese { get; set; }
         /*************************FIM TRIAGEM PEDIATRIA*****************************/

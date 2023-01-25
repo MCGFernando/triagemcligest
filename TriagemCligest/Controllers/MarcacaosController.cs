@@ -32,11 +32,12 @@ namespace TriagemCligest.Controllers
             
             var marcacao = _context.FindById(id.Value);
 
-            Console.WriteLine("IdUtente " + marcacao.IDutente);
-            Console.WriteLine("IdFuncionario " + marcacao.IDCentro);
-            
+            //Console.WriteLine("IdUtente " + marcacao.IDutente);
+            //Console.WriteLine("IdFuncionario " + marcacao.IDCentro);
+
             TempData["IdUtente"] = marcacao.IDutente;
             TempData["IdFuncionario"] = marcacao.IDCentro;
+            TempData["Especialidade"] = marcacao.Especialidade;
             
             return RedirectToAction("Create", "Triagems");
         }

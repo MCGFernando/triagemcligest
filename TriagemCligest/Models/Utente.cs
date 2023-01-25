@@ -78,11 +78,12 @@ namespace TriagemCligest.Models
         public int? CartaoIDUploadLast { get; private set; }
 
 
-        public double GetIdade()
+        public int GetIdade()
         {
+            if (DataNascimento == null) return 0;
             DateTime today = DateTime.Today;
             TimeSpan age = (TimeSpan)(today - DataNascimento);
-            return age.TotalDays / 365.25;
+            return (int)(age.TotalDays / 365.25);
         }
     }
 }

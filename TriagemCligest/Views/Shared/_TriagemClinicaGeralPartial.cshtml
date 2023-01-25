@@ -1,56 +1,96 @@
 ﻿@model TriagemCligest.Models.Triagem
-<div class="form-group">
-    <label asp-for="Patologia" class="control-label"></label>
-    <input asp-for="Patologia" class="form-control" />
-    <span asp-validation-for="Patologia" class="text-danger"></span>
+@using TriagemCligest.Models.Enum
+
+<div class="row">
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Patologia" class="form-check-input" />
+            <label asp-for="Patologia" class="control-label"></label>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <label asp-for="DescricaoPatologia" class="control-label"></label>
+            <input asp-for="DescricaoPatologia" class="form-control" />
+            <span asp-validation-for="DescricaoPatologia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Alergia" class="form-check-input" />
+            <label asp-for="Alergia" class="control-label"></label>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <label asp-for="DescricaoAlergia" class="control-label"></label>
+            <input asp-for="DescricaoAlergia" class="form-control" />
+            <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Medicamento" class="form-check-input" />
+            <label asp-for="Medicamento" class="control-label"></label>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <label asp-for="DescricaoMedicamento" class="control-label"></label>
+            <input asp-for="DescricaoMedicamento" class="form-control" />
+            <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="DescricaoPatologia" class="control-label"></label>
-    <input asp-for="DescricaoPatologia" class="form-control" />
-    <span asp-validation-for="DescricaoPatologia" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-2">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Ictericia" /> @Html.DisplayNameFor(model => model.Ictericia)
+            </label>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="ClassificacaoPeleMucosa" class="control-label"></label>
+            <select asp-for="ClassificacaoPeleMucosa" asp-items="Html.GetEnumSelectList<ClassificacaoPeleMucosa>()" class="form-control"></select>
+            <span asp-validation-for="ClassificacaoPeleMucosa" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="LesaoCutanea" class="control-label"></label>
+            <input asp-for="LesaoCutanea" class="form-control" />
+            <span asp-validation-for="LesaoCutanea" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="Alergia" class="control-label"></label>
-    <input asp-for="Alergia" class="form-control" />
-    <span asp-validation-for="Alergia" class="text-danger"></span>
+
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+        <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
+        <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control"></select>
+        <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
+    </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="LocalQueimadura" class="control-label"></label>
+            <input asp-for="LocalQueimadura" class="form-control" />
+            <span asp-validation-for="LocalQueimadura" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="DescricaoAlergia" class="control-label"></label>
-    <input asp-for="DescricaoAlergia" class="form-control" />
-    <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Medicamento" class="control-label"></label>
-    <input asp-for="Medicamento" class="form-control" />
-    <span asp-validation-for="Medicamento" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="DescricaoMedicamento" class="control-label"></label>
-    <input asp-for="DescricaoMedicamento" class="form-control" />
-    <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="ClassificacaoPeleMucosa" class="control-label"></label>
-    <select asp-for="ClassificacaoPeleMucosa" class="form-control"></select>
-    <span asp-validation-for="ClassificacaoPeleMucosa" class="text-danger"></span>
-</div>
-<div class="form-group form-check">
-    <label class="form-check-label">
-        <input class="form-check-input" asp-for="Ictericia" /> @Html.DisplayNameFor(model => model.Ictericia)
-    </label>
-</div>
-<div class="form-group">
-    <label asp-for="LesaoCutanea" class="control-label"></label>
-    <input asp-for="LesaoCutanea" class="form-control" />
-    <span asp-validation-for="LesaoCutanea" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
-    <select asp-for="ClassificacaoQueimadura" class="form-control"></select>
-    <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="LocalQueimadura" class="control-label"></label>
-    <input asp-for="LocalQueimadura" class="form-control" />
-    <span asp-validation-for="LocalQueimadura" class="text-danger"></span>
-</div>
+
+
+
+
+
+
+
+
+
+
+

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TriagemCligest.Data;
 using TriagemCligest.Models;
+using TriagemCligest.Service;
 
 namespace TriagemCligest.Controllers
 {
     public class TriagemsController : Controller
     {
         private readonly TriagemContext _context;
+        private readonly UtenteService _contextUtente;
 
-        public TriagemsController(TriagemContext context)
+        public TriagemsController(TriagemContext context, UtenteService contextUtente)
         {
             _context = context;
+            _contextUtente = contextUtente;
         }
 
         // GET: Triagems
@@ -52,7 +55,10 @@ namespace TriagemCligest.Controllers
             //ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID");
             //ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID");
 
-            return View();
+            if (TempData["IdUtente"] == null) return RedirectToAction("Index", "Marcacaos");
+            var utente = _contextUtente.FindById((int)TempData["IdUtente"]);
+            Triagem triagem = new() { Utente = utente };
+            return View(triagem);
         }
 
         // POST: Triagems/Create
@@ -162,14 +168,14 @@ namespace TriagemCligest.Controllers
             {
                 _context.Triagem.Remove(triagem);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TriagemExists(int id)
         {
-          return _context.Triagem.Any(e => e.Id == id);
+            return _context.Triagem.Any(e => e.Id == id);
         }
     }
 }

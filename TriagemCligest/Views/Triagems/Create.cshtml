@@ -17,25 +17,31 @@
 
             <div class="cabecalho-container">
                 <div class="form-group">
-                    <input type="hidden" asp-for="MarcacaoID" class="form-control" asp-items="ViewBag.MarcacaoID"/>
+                    <input type="hidden" asp-for="MarcacaoID" class="form-control" asp-items="ViewBag.MarcacaoID" />
                 </div>
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
                             <label asp-for="UtenteID" class="control-label"></label>
-                            <select asp-for="UtenteID" class="form-control" asp-items="ViewBag.UtenteID"></select>
+                            <input asp-for="UtenteID" class="form-control" value="@Model.Utente.ID" readonly required />
                         </div>
                     </div>
                     <div class="col-5">
                         <div class="form-group">
-                            <label asp-for="UtenteID" class="control-label"></label>
-                            <select asp-for="UtenteID" class="form-control" asp-items="ViewBag.UtenteID"></select>
+                            <label asp-for="Utente.Nome" class="control-label"></label>
+                            <input asp-for="Utente.Nome" class="form-control" readonly required />
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label class="control-label">Idade</label>
+                            <input value="@Model.Utente.GetIdade()" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-2">
                         <div class="form-group">
                             <label asp-for="TipoTriagem" class="control-label"></label>
-                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem"></select>
+                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem" required></select>
                             <span asp-validation-for="TipoTriagem" class="text-danger"></span>
                         </div>
                     </div>
@@ -44,14 +50,14 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label asp-for="HoraChegada" class="control-label"></label>
-                            <input asp-for="HoraChegada" class="form-control" />
+                            <input asp-for="HoraChegada" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
                             <span asp-validation-for="HoraChegada" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label asp-for="HoraAcolhimento" class="control-label"></label>
-                            <input asp-for="HoraAcolhimento" class="form-control" />
+                            <input asp-for="HoraAcolhimento" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
                             <span asp-validation-for="HoraAcolhimento" class="text-danger"></span>
                         </div>
                     </div>
@@ -67,7 +73,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label asp-for="SituacaoQueixa" class="control-label"></label>
-                            <textarea asp-for="SituacaoQueixa" class="form-control"></textarea>
+                            <textarea asp-for="SituacaoQueixa" class="form-control" required></textarea>
                             <span asp-validation-for="SituacaoQueixa" class="text-danger"></span>
                         </div>
                     </div>
@@ -152,12 +158,12 @@
             </div>
 
             <div id="partials-container">
-                <div id="0" style="display:none"><partial name="_TriagemClinicaGeralPartial" model="Model" /></div>
-                <div id="1" style="display:none"><partial name="_TriagemPediatriaPartial" model="Model" /></div>
-                <div id="2" ><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
-                <div id="3" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
+                <div id="0" class="tipo-triagem" data-tipo="0" style="display:none"><partial name="_TriagemClinicaGeralPartial" model="Model" /></div>
+                <div id="1" class="tipo-triagem" data-tipo="1" style="display:none"><partial name="_TriagemPediatriaPartial" model="Model" /></div>
+                <div id="2" class="tipo-triagem" data-tipo="2" style="display:none"><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
+                <div id="3" class="tipo-triagem" data-tipo="3" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
             </div>
-            
+
 
             <div class="rodape-container">
                 <div class="form-group">
@@ -189,16 +195,20 @@
 }
 
 <script>
-    /*const partialsContainer = document.getElementById('partials-container');
-    const tipoTriagem = document.getElementById('tipoTriagem');
-    const tipoTriagemValor = document.getElementById('tipoTriagem').value;
-    tipoTriagem.addEventListener('change', e => {
-        e.preventDefault()
-        console.log("Valor", tipoTriagemValor)
-        if (tipoTriagemValor === "0") document.getElementById('0').style.display = 'block';
-        if (tipoTriagemValor === "1") document.getElementById('1').style.display = 'block';
-        if (tipoTriagemValor === "2") document.getElementById('2').style.display = 'block';
-        if (tipoTriagemValor === "3") document.getElementById('3').style.display = 'block';
+    $(function () {
+        ValidaTipoTriagem()
 
-    })*/
+        $('#tipoTriagem').on('change', function () {
+            ValidaTipoTriagem()
+        })
+    });
+
+    function ValidaTipoTriagem() {
+        $('.tipo-triagem').each(function () {
+            $(this).hide()
+            if ($('#tipoTriagem').val() == $(this).data("tipo")) {
+                $(this).show()
+            }
+        })
+    }
 </script>
