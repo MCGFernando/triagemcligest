@@ -38,6 +38,7 @@ namespace TriagemCligest.Controllers
             TempData["IdUtente"] = marcacao.IDutente;
             TempData["IdFuncionario"] = marcacao.IDCentro;
             TempData["Especialidade"] = marcacao.Especialidade;
+            TempData["IdMarcacao"] = marcacao.ID;
             
             return RedirectToAction("Create", "Triagems");
         }

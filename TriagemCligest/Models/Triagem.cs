@@ -99,18 +99,18 @@ namespace TriagemCligest.Models
         public ClassificacaoDiurese? ClassificacaoDiurese { get; set; }
         /*************************FIM TRIAGEM PEDIATRIA*****************************/
 
-        [Column("dataregisto")]
+        [Column("DataRegisto")]
         public DateTime? DatarRgisto { get; set; }
         public DateTime DatarActualizacao { get; set; } = DateTime.Now;
-        [Column("hora_chegada")]
+        
         public TimeSpan? HoraChegada { get; set; }
-        [Column("hora_atendimento_medico")]
+        
         public TimeSpan? HoraAtendimentoMedico { get; set; }
-        [Column("hora_acolhimento")]
+        
         public TimeSpan? HoraAcolhimento { get; set; }
         public ClassificacaoTriagem ClassificacaoTriagem { get; set; }
         public EstadoTriagem EstadoTriagem { get; set; }
-        public ClassificacaoUnidade ClassificacaoUnidade { get; set; }
+        public ClassificacaoUnidade ClassificacaoUnidade { get; set; } = ClassificacaoUnidade.LDA;
 
         public string EnumToColor(ClassificacaoTriagem classificacaoTriagem)
         {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc;
 using TriagemCligest.Data;
 using TriagemCligest.Models;
 using TriagemCligest.Service;
@@ -15,18 +16,33 @@ namespace TriagemCligest.Controllers
     {
         private readonly TriagemContext _context;
         private readonly UtenteService _contextUtente;
+        private readonly MarcacaoService _contextMarcacao;
 
-        public TriagemsController(TriagemContext context, UtenteService contextUtente)
+        public TriagemsController(TriagemContext context, UtenteService contextUtente, MarcacaoService contextMarcacao)
         {
             _context = context;
             _contextUtente = contextUtente;
+            _contextMarcacao = contextMarcacao;
         }
 
         // GET: Triagems
         public async Task<IActionResult> Index()
         {
-            var triagemContext = _context.Triagem.Include(t => t.Marcacao).Include(t => t.Utente);
-            return View(await triagemContext.ToListAsync());
+            
+                var queryTriagem = from t in _context.Triagem.ToList() select t;
+                var queryUtente = from u in _contextUtente.FindAll() select u;
+                var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID select new { a, b };
+            List<Triagem> tt = new List<Triagem>();
+            foreach (var item in result)
+            {
+                Triagem ttt = item.a;
+                ttt.Utente = item.b;
+                tt.Add(ttt);
+            }
+
+
+            var triagemContext = _context.Triagem;
+            return View(tt);
         }
 
         // GET: Triagems/Details/5
@@ -57,7 +73,7 @@ namespace TriagemCligest.Controllers
 
             if (TempData["IdUtente"] == null) return RedirectToAction("Index", "Marcacaos");
             var utente = _contextUtente.FindById((int)TempData["IdUtente"]);
-            Triagem triagem = new() { Utente = utente };
+            Triagem triagem = new() { Utente = utente, MarcacaoID = (int)TempData["IdMarcacao"] };
             return View(triagem);
         }
 
