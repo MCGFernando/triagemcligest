@@ -1,16 +1,16 @@
 ﻿@model TriagemCligest.Models.Triagem
 @using TriagemCligest.Models.Enum
 
-<div class="row">
+<div class="row d-flex align-items-center">
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Patologia" class="form-check-input" />
+            <input asp-for="Patologia" class="form-check-input" id="patologia"/>
             <label asp-for="Patologia" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
-            <label asp-for="DescricaoPatologia" class="control-label"></label>
+            <label asp-for="DescricaoPatologia" class="control-label" id="descricaoPatologia"></label>
             <input asp-for="DescricaoPatologia" class="form-control" />
             <span asp-validation-for="DescricaoPatologia" class="text-danger"></span>
         </div>
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row d-flex align-items-center">
     <div class="col-2">
         <div class="form-group form-check">
             <label class="form-check-label">
@@ -67,13 +67,13 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row d-flex align-items-center">
     <div class="col-6">
         <div class="form-group">
-        <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
-        <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control"></select>
-        <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
-    </div>
+            <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
+            <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control"></select>
+            <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
+        </div>
     </div>
     <div class="col-6">
         <div class="form-group">
@@ -83,8 +83,129 @@
         </div>
     </div>
 </div>
-
-
+<!--RESPIRATORIO-->
+<div class="row d-flex align-items-center">
+    <div class="col-2">
+        <div class="form-group">
+            <label asp-for="Cianose" class="control-label"></label>
+            <input asp-for="Cianose" class="form-check-input" />
+            <span asp-validation-for="Cianose" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="LocalCianose" class="control-label"></label>
+            <input asp-for="LocalCianose" class="form-control" />
+            <span asp-validation-for="LocalCianose" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            <label asp-for="SaturacaoOxigenio" class="control-label"></label>
+            <input asp-for="SaturacaoOxigenio" class="form-control" />
+            <span asp-validation-for="SaturacaoOxigenio" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row d-flex align-items-center">
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Tosse" class="control-label"></label>
+            <input asp-for="Tosse" class="form-check-input" />
+            <span asp-validation-for="Tosse" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Expectoracao" class="control-label"></label>
+            <input asp-for="Expectoracao" class="form-check-input" />
+            <span asp-validation-for="Expectoracao" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="ClassificacaoExpectoracao" class="control-label"></label>
+            <select asp-for="ClassificacaoExpectoracao" asp-items="Html.GetEnumSelectList<ClassificacaoExpectoracao>()" class="form-control"></select>
+            <span asp-validation-for="ClassificacaoExpectoracao" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<!--GASTROINTESTINAL-->
+<div class="row d-flex align-items-center">
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Hematemese" class="form-check-input" />
+            <label asp-for="Hematemese" class="control-label"></label>
+            <span asp-validation-for="Hematemese" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Vomito" class="form-check-input" />
+            <label asp-for="Vomito" class="control-label"></label>
+            <span asp-validation-for="Vomito" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Melena" class="form-check-input" />
+            <label asp-for="Melena" class="control-label"></label>
+            <span asp-validation-for="Melena" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Enterorragia" class="form-check-input" />
+            <label asp-for="Enterorragia" class="control-label"></label>
+            <span asp-validation-for="Enterorragia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Obstipacao" class="form-check-input" />
+            <label asp-for="Obstipacao" class="control-label"></label>
+            <span asp-validation-for="Obstipacao" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Diarreia" class="form-check-input" />
+            <label asp-for="Diarreia" class="control-label"></label>
+            <span asp-validation-for="Diarreia" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<!--GENITOURINARIO-->
+<div class="row d-flex align-items-center">
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="ClassificacaoGenitoUrinario" class="control-label"></label>
+            <select asp-for="ClassificacaoGenitoUrinario" asp-items="Html.GetEnumSelectList<ClassificacaoGenitoUrinario>()" class="form-control"></select>
+            <span asp-validation-for="ClassificacaoGenitoUrinario" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Metrorragia" class="form-check-input" />
+            <label asp-for="Metrorragia" class="control-label"></label>
+            <span asp-validation-for="Metrorragia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="Dismenorreia" class="form-check-input" />
+            <label asp-for="Dismenorreia" class="control-label"></label>
+            <span asp-validation-for="Dismenorreia" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <input asp-for="SecrecaoUretralVaginal" class="form-check-input" />
+            <label asp-for="SecrecaoUretralVaginal" class="control-label"></label>
+            <span asp-validation-for="SecrecaoUretralVaginal" class="text-danger"></span>
+        </div>
+    </div>
+</div>
 
 
 

@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model TriagemCligest.Models.Triagem
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Gravidez)</td>
+    <td>@Html.DisplayFor(model => model.Gravidez)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.MedicoAssistente)</td>
+    <td>@Html.DisplayFor(model => model.MedicoAssistente)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Medicamento)</td>
+    <td>@Html.DisplayFor(model => model.Medicamento) @Html.DisplayFor(model => model.DescricaoMedicamento)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.AtrasoMenstrual)</td>
+    <td>@Html.DisplayFor(model => model.AtrasoMenstrual)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Mioma)</td>
+    <td>@Html.DisplayFor(model => model.Mioma)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.QuistosOvarios)</td>
+    <td>@Html.DisplayFor(model => model.QuistosOvarios)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Metrorragia)</td>
+    <td>@Html.DisplayFor(model => model.Metrorragia)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Dismenorreia)</td>
+    <td>@Html.DisplayFor(model => model.Dismenorreia)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.CorrimentoVaginal)</td>
+    <td>@Html.DisplayFor(model => model.CorrimentoVaginal)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.CaracteristicaCorrimentoVaginal)</td>
+    <td>@Html.DisplayFor(model => model.CaracteristicaCorrimentoVaginal)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.PruridoVaginal)</td>
+    <td>@Html.DisplayFor(model => model.PruridoVaginal)</td>
+</tr>

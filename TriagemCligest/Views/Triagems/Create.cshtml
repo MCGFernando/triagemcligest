@@ -177,7 +177,7 @@
                     <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit"/>
                 </div>
             </div>
         </form>
@@ -197,10 +197,22 @@
 <script>
     $(function () {
         ValidaTipoTriagem()
-
+        $('#descricaoPatologia').prop('disabled', true)
         $('#tipoTriagem').on('change', function () {
             ValidaTipoTriagem()
         })
+
+        /*$('#btnSubmit').on('click', function(event){
+            //event.preventDefault()
+            console.log('submeteu')
+            if($('#patologia').is(":checked")){
+                $('#descricaoPatologia').prop('disabled', false)
+            }else{
+                $('#descricaoPatologia').prop('disabled', true)
+                console.log('is not checked')
+            }
+        });*/
+
     });
 
     function ValidaTipoTriagem() {
@@ -211,4 +223,6 @@
             }
         })
     }
+
+
 </script>

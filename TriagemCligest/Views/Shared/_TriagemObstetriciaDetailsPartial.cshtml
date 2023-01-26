@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model TriagemCligest.Models.Triagem
+<tr>
+    <td>@Html.DisplayNameFor(model => model.SemanaGravidez)</td>
+    <td>@Html.DisplayFor(model => model.SemanaGravidez)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Medicamento)</td>
+    <td>@Html.DisplayFor(model => model.Medicamento) @Html.DisplayFor(model => model.DescricaoMedicamento)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Alergia)</td>
+    <td>@Html.DisplayFor(model => model.Alergia) @Html.DisplayFor(model => model.DescricaoAlergia)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.ContracaoUterina)</td>
+    <td>@Html.DisplayFor(model => model.ContracaoUterina)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Hiperemese)</td>
+    <td>@Html.DisplayFor(model => model.Hiperemese)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.Desidratacao)</td>
+    <td>@Html.DisplayFor(model => model.Desidratacao)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.AbcessoMamario)</td>
+    <td>@Html.DisplayFor(model => model.AbcessoMamario)</td>
+</tr>
+<tr>
+    <td>@Html.DisplayNameFor(model => model.IngurgitamentoMamario)</td>
+    <td>@Html.DisplayFor(model => model.IngurgitamentoMamario)</td>
+</tr>
