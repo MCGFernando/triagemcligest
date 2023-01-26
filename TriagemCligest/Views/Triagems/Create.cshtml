@@ -172,8 +172,9 @@
                     <span asp-validation-for="ClassificacaoTriagem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="EstadoTriagem" class="control-label"></label>
+                    
                     <input type="hidden" asp-for="EstadoTriagem" value="@EstadoTriagem.REALIZADA" class="form-control" />
+                    <input type="hidden" asp-for="DatarRgisto" value="@DateTime.Today" class="form-control" />
                     <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
                 </div>
                 <div class="form-group">

@@ -107,13 +107,18 @@ namespace TriagemCligest.Controllers
                 return NotFound();
             }
 
-            var triagem = await _context.Triagem.FindAsync(id);
+            var queryTriagem = from t in _context.Triagem.ToList() select t;
+            var queryUtente = from u in _contextUtente.FindAll() select u;
+            var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
+            //result = result.Where(qt => qt.a.Id == id.Value);
+            Triagem triagem = result.Select(x => x.a).FirstOrDefault();
+            //triagem.Utente = result.Select(x => x.b).FirstOrDefault();
             if (triagem == null)
             {
                 return NotFound();
             }
-            ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
-            ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
+            triagem.Utente = result.Select(x => x.b).FirstOrDefault();
+            
             return View(triagem);
         }
 
