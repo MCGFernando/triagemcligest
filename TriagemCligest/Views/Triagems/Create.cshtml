@@ -12,12 +12,12 @@
 <div class="row">
     <div class="col-12">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
 
             <div class="cabecalho-container">
                 <div class="form-group">
-                    <input type="hidden" asp-for="MarcacaoID" class="form-control"/>
+                    <input type="hidden" asp-for="MarcacaoID" class="form-control" />
                 </div>
                 <div class="row">
                     <div class="col-3">
@@ -41,7 +41,7 @@
                     <div class="col-2">
                         <div class="form-group">
                             <label asp-for="TipoTriagem" class="control-label"></label>
-                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem" required></select>
+                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem"></select>
                             <span asp-validation-for="TipoTriagem" class="text-danger"></span>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label asp-for="SituacaoQueixa" class="control-label"></label>
-                            <textarea asp-for="SituacaoQueixa" class="form-control" required></textarea>
+                            <textarea asp-for="SituacaoQueixa" class="form-control"></textarea>
                             <span asp-validation-for="SituacaoQueixa" class="text-danger"></span>
                         </div>
                     </div>
@@ -95,9 +95,9 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label asp-for="TensaoArterialDiastolica" class="control-label"></label>
-                            <input asp-for="TensaoArterialDiastolica" class="form-control" />
-                            <span asp-validation-for="TensaoArterialDiastolica" class="text-danger"></span>
+                            <label asp-for="ClassificacaoTensaoArterial" class="control-label"></label>
+                            <select asp-for="ClassificacaoTensaoArterial" asp-items="Html.GetEnumSelectList<ClassificacaoTensaoArterial>()" class="form-control"></select>
+                            <span asp-validation-for="ClassificacaoTensaoArterial" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
             <div id="partials-container">
                 <div id="0" class="tipo-triagem" data-tipo="0" style="display:none"><partial name="_TriagemClinicaGeralPartial" model="Model" /></div>
                 <div id="1" class="tipo-triagem" data-tipo="1" style="display:none"><partial name="_TriagemPediatriaPartial" model="Model" /></div>
-                <div id="2" class="tipo-triagem" data-tipo="2" style="display:none"><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
-                <div id="3" class="tipo-triagem" data-tipo="3" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
+                <div id="2" class="tipo-triagem" data-tipo="2" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
+                <div id="3" class="tipo-triagem" data-tipo="3" style="display:none"><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
             </div>
 
 
@@ -172,13 +172,13 @@
                     <span asp-validation-for="ClassificacaoTriagem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    
+
                     <input type="hidden" asp-for="EstadoTriagem" value="@EstadoTriagem.REALIZADA" class="form-control" />
                     <input type="hidden" asp-for="DatarRgisto" value="@DateTime.Today" class="form-control" />
                     <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit"/>
+                    <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit" />
                 </div>
             </div>
         </form>
@@ -203,16 +203,19 @@
             ValidaTipoTriagem()
         })
 
-        /*$('#btnSubmit').on('click', function(event){
+        $('#patologia').on('change', function (event) {
             //event.preventDefault()
             console.log('submeteu')
-            if($('#patologia').is(":checked")){
+            if ($('#patologia').is(":checked")) {
                 $('#descricaoPatologia').prop('disabled', false)
-            }else{
+                $("#descricaoPatologia").prop("required", true);
+                console.log('is checked')
+            } else {
                 $('#descricaoPatologia').prop('disabled', true)
+                $("#descricaoPatologia").prop("required", false);
                 console.log('is not checked')
             }
-        });*/
+        });
 
     });
 
