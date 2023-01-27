@@ -20,6 +20,12 @@ namespace TriagemCligest.Service
             if (!UtenteExists(id)) { return null; }
             return _context.Utente.FirstOrDefault(e => e.ID == id);
         }
+
+        public List<Utente> FindBySearch(string search)
+        {
+            
+            return _context.Utente.Where(u => u.Nome.Contains(search)).ToList();
+        }
         private bool UtenteExists(int id)
         {
             return _context.Utente.Any(e => e.ID == id);

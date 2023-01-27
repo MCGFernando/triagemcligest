@@ -42,6 +42,22 @@ namespace TriagemCligest.Controllers
             return View(lstTriagem);
         }
 
+        public async Task<IActionResult> GroupingSearch(string? search)
+        {
+            if (search == null) return RedirectToAction(nameof(Index));
+            var qryTriagem = _context.Triagem.ToList();
+            var qryUtente = _contextUtente.FindBySearch(search);
+            var result = from a in qryTriagem join b in qryUtente on a.UtenteID equals b.ID select new { a, b };
+            List<Triagem> lstTriagem = new List<Triagem>();
+            foreach (var item in result)
+            {
+                Triagem triagem = item.a;
+                triagem.Utente = item.b;
+                lstTriagem.Add(triagem);
+            }
+            return View(lstTriagem);
+        }
+
         // GET: Triagems/Details/5
         public async Task<IActionResult> Details(int? id)
         {
