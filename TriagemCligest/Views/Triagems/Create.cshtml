@@ -10,7 +10,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-12">
+    <!--<div class="col-12 ">-->
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -20,25 +20,25 @@
                     <input type="hidden" asp-for="MarcacaoID" class="form-control" />
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="form-group">
                             <label asp-for="UtenteID" class="control-label"></label>
                             <input asp-for="UtenteID" class="form-control" value="@Model.Utente.ID" readonly required />
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-lg-5 col-md-8 col-sm-12">
                         <div class="form-group">
                             <label asp-for="Utente.Nome" class="control-label"></label>
                             <input asp-for="Utente.Nome" class="form-control" readonly required />
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-4 col-sm-12">
                         <div class="form-group">
                             <label class="control-label">Idade</label>
                             <input value="@Model.Utente.GetIdade()" class="form-control" />
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-8 col-sm-12">
                         <div class="form-group">
                             <label asp-for="TipoTriagem" class="control-label"></label>
                             <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem"></select>
@@ -182,7 +182,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    <!--</div>-->
 </div>
 
 <div>
@@ -203,17 +203,87 @@
             ValidaTipoTriagem()
         })
 
-        $('#patologia').on('change', function (event) {
+        $('#patologia').on('change', function () {
             //event.preventDefault()
-            console.log('submeteu')
+
             if ($('#patologia').is(":checked")) {
                 $('#descricaoPatologia').prop('disabled', false)
                 $("#descricaoPatologia").prop("required", true);
-                console.log('is checked')
+
             } else {
                 $('#descricaoPatologia').prop('disabled', true)
                 $("#descricaoPatologia").prop("required", false);
-                console.log('is not checked')
+
+            }
+        });
+
+        $('#medicamento').on('change', function () {
+            //event.preventDefault()
+
+            if ($('#medicamento').is(":checked")) {
+                $('#descricaoMedicamento').prop('disabled', false)
+                $("#descricaoMedicamento").prop("required", true);
+
+            } else {
+                $('#descricaoMedicamento').prop('disabled', true)
+                $("#descricaoMedicamento").prop("required", false);
+
+            }
+        });
+
+        $('#alergia').on('change', function () {
+            //event.preventDefault()
+
+            if ($('#alergia').is(":checked")) {
+                $('#descricaoAlergia').prop('disabled', false)
+                $("#descricaoAlergia").prop("required", true);
+
+            } else {
+                $('#descricaoAlergia').prop('disabled', true)
+                $("#descricaoAlergia").prop("required", false);
+
+            }
+        });
+
+        $('#classificacaoQueimadura').on('change', function () {
+            //event.preventDefault()
+
+            if ($('#classificacaoQueimadura').val() != 0) {
+                $('#localQueimadura').prop('disabled', false)
+                $("#localQueimadura").prop("required", true);
+
+            } else {
+                $('#localQueimadura').prop('disabled', true)
+                $("#localQueimadura").prop("required", false);
+
+            }
+        });
+
+        $('#cianose').on('change', function () {
+            //event.preventDefault()
+
+            if ($('#cianose').is(":checked")) {
+                $('#localCianose').prop('disabled', false)
+                $("#localCianose").prop("required", true);
+
+            } else {
+                $('#localCianose').prop('disabled', true)
+                $("#localCianose").prop("required", false);
+
+            }
+        });
+
+        $('#expectoracao').on('change', function () {
+            //event.preventDefault()
+
+            if ($('#expectoracao').is(":checked")) {
+                $('#classificacaoExpectoracao').prop('disabled', false)
+                $("#classificacaoExpectoracao").prop("required", true);
+
+            } else {
+                $('#classificacaoExpectoracao').prop('disabled', true)
+                $("#classificacaoExpectoracao").prop("required", false);
+
             }
         });
 
@@ -227,6 +297,6 @@
             }
         })
     }
-
+     
 
 </script>

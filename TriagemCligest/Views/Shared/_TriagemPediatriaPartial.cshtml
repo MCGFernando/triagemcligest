@@ -3,40 +3,40 @@
 <div class="row d-flex align-items-center">
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Patologia" class="form-check-input" id="patologia" />
+            <input asp-for="Patologia" class="form-check-input" id="patologiaPed" />
             <label asp-for="Patologia" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
-            <label asp-for="DescricaoPatologia" class="control-label" id="descricaoPatologia"></label>
-            <input asp-for="DescricaoPatologia" class="form-control" />
+            <label asp-for="DescricaoPatologia" class="control-label" ></label>
+            <input asp-for="DescricaoPatologia" class="form-control" id="descricaoPatologiaPed" disabled/>
             <span asp-validation-for="DescricaoPatologia" class="text-danger"></span>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Alergia" class="form-check-input" />
+            <input asp-for="Alergia" class="form-check-input" id="alergiaPed" />
             <label asp-for="Alergia" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
             <label asp-for="DescricaoAlergia" class="control-label"></label>
-            <input asp-for="DescricaoAlergia" class="form-control" />
+            <input asp-for="DescricaoAlergia" class="form-control" id="descricaoAlergiaPed" disabled />
             <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Medicamento" class="form-check-input" />
+            <input asp-for="Medicamento" class="form-check-input" id="medicamentoPed" />
             <label asp-for="Medicamento" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
             <label asp-for="DescricaoMedicamento" class="control-label"></label>
-            <input asp-for="DescricaoMedicamento" class="form-control" />
+            <input asp-for="DescricaoMedicamento" class="form-control" id="descricaoMedicamentoPed" disabled />
             <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
         </div>
     </div>
@@ -60,7 +60,7 @@
     <div class="col-3">
         <div class="form-group">
             <label asp-for="ClassificacaoColoracaoPele" class="control-label"></label>
-            <select asp-for="ClassificacaoColoracaoPele" class="form-control"></select>
+            <select asp-for="ClassificacaoColoracaoPele" asp-items="Html.GetEnumSelectList<ClassificacaoColoracaoPele>()" class="form-control"></select>
             <span asp-validation-for="ClassificacaoColoracaoPele" class="text-danger"></span>
         </div>
     </div>
@@ -77,14 +77,14 @@
     <div class="col-6">
         <div class="form-group">
             <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
-            <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control"></select>
+            <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control" id="classificacaoQueimaduraPed"></select>
             <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group">
             <label asp-for="LocalQueimadura" class="control-label"></label>
-            <input asp-for="LocalQueimadura" class="form-control" />
+            <input asp-for="LocalQueimadura" class="form-control" id="localQueimaduraPed" disabled />
             <span asp-validation-for="LocalQueimadura" class="text-danger"></span>
         </div>
     </div>
@@ -101,7 +101,7 @@
     <div class="col-2">
         <div class="form-group form-check">
             <label class="form-check-label">
-                <input class="form-check-input" asp-for="Cianose" /> @Html.DisplayNameFor(model => model.Cianose)
+                <input class="form-check-input" asp-for="Cianose" id="cianosePed" /> @Html.DisplayNameFor(model => model.Cianose)
             </label>
         </div>
     </div>
@@ -109,7 +109,7 @@
 
         <div class="form-group">
             <label asp-for="LocalCianose" class="control-label"></label>
-            <input asp-for="LocalCianose" class="form-control" />
+            <input asp-for="LocalCianose" class="form-control" id="localCianosePed" disabled/>
             <span asp-validation-for="LocalCianose" class="text-danger"></span>
         </div>
     </div>

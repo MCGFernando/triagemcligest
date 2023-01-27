@@ -23,6 +23,7 @@ builder.Services.AddScoped<MarcacaoService>();
 builder.Services.AddScoped<OperadorService>();
 builder.Services.AddScoped<UtenteService>();
 builder.Services.AddScoped<LoginService>();
+builder.Services.AddHttpContextAccessor();  
 builder.Services.AddTransient<SessionValidationMiddleware>();
 
 /*builder.Services.AddAuthentication(options =>

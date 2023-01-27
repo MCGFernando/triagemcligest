@@ -17,27 +17,27 @@
     </div>
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Alergia" class="form-check-input" />
+            <input asp-for="Alergia" class="form-check-input" id="alergia" />
             <label asp-for="Alergia" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
             <label asp-for="DescricaoAlergia" class="control-label"></label>
-            <input asp-for="DescricaoAlergia" class="form-control" />
+            <input asp-for="DescricaoAlergia" class="form-control" id="descricaoAlergia" disabled />
             <span asp-validation-for="DescricaoAlergia" class="text-danger"></span>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
-            <input asp-for="Medicamento" class="form-check-input" />
+            <input asp-for="Medicamento" class="form-check-input" id="medicamento" />
             <label asp-for="Medicamento" class="control-label"></label>
         </div>
     </div>
     <div class="col-2">
         <div class="form-group">
             <label asp-for="DescricaoMedicamento" class="control-label"></label>
-            <input asp-for="DescricaoMedicamento" class="form-control" />
+            <input asp-for="DescricaoMedicamento" class="form-control" id="descricaoMedicamento" disabled />
             <span asp-validation-for="DescricaoMedicamento" class="text-danger"></span>
         </div>
     </div>
@@ -71,14 +71,14 @@
     <div class="col-6">
         <div class="form-group">
             <label asp-for="ClassificacaoQueimadura" class="control-label"></label>
-            <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control"></select>
+            <select asp-for="ClassificacaoQueimadura" asp-items="Html.GetEnumSelectList<ClassificacaoQueimadura>()" class="form-control" id="classificacaoQueimadura"></select>
             <span asp-validation-for="ClassificacaoQueimadura" class="text-danger"></span>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group">
             <label asp-for="LocalQueimadura" class="control-label"></label>
-            <input asp-for="LocalQueimadura" class="form-control" />
+            <input asp-for="LocalQueimadura" class="form-control" id="localQueimadura" disabled />
             <span asp-validation-for="LocalQueimadura" class="text-danger"></span>
         </div>
     </div>
@@ -88,14 +88,14 @@
     <div class="col-2">
         <div class="form-group">
             <label asp-for="Cianose" class="control-label"></label>
-            <input asp-for="Cianose" class="form-check-input" />
+            <input asp-for="Cianose" class="form-check-input" id="cianose" />
             <span asp-validation-for="Cianose" class="text-danger"></span>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group">
             <label asp-for="LocalCianose" class="control-label"></label>
-            <input asp-for="LocalCianose" class="form-control" />
+            <input asp-for="LocalCianose" class="form-control" id="localCianose" disabled/>
             <span asp-validation-for="LocalCianose" class="text-danger"></span>
         </div>
     </div>
@@ -118,14 +118,14 @@
     <div class="col-3">
         <div class="form-group">
             <label asp-for="Expectoracao" class="control-label"></label>
-            <input asp-for="Expectoracao" class="form-check-input" />
+            <input asp-for="Expectoracao" class="form-check-input" id="expectoracao" />
             <span asp-validation-for="Expectoracao" class="text-danger"></span>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group">
             <label asp-for="ClassificacaoExpectoracao" class="control-label"></label>
-            <select asp-for="ClassificacaoExpectoracao" asp-items="Html.GetEnumSelectList<ClassificacaoExpectoracao>()" class="form-control"></select>
+            <select asp-for="ClassificacaoExpectoracao" asp-items="Html.GetEnumSelectList<ClassificacaoExpectoracao>()" class="form-control" id="classificacaoExpectoracao" disabled></select>
             <span asp-validation-for="ClassificacaoExpectoracao" class="text-danger"></span>
         </div>
     </div>
