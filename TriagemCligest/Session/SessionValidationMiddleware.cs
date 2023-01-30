@@ -11,13 +11,13 @@
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             Console.WriteLine("Midleware");
-            /*ar session = _httpContextAccessor.HttpContext.Session;
+            var session = _httpContextAccessor.HttpContext.Session;
             if (session.GetString("Utilizador") == null)
             {
                 Console.WriteLine("Midleware Nao Autenticado");
-                context.Response.Redirect("/Login");
+                context.Response.Redirect("Login");
                 return;
-            }*/
+            }
             await next(context);
         }
     }

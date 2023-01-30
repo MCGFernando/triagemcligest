@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NuGet.Protocol.Plugins;
+using System.Security.Claims;
 using TriagemCligest.Models;
 using TriagemCligest.Service;
 

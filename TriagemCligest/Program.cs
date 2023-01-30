@@ -23,7 +23,8 @@ builder.Services.AddScoped<MarcacaoService>();
 builder.Services.AddScoped<OperadorService>();
 builder.Services.AddScoped<UtenteService>();
 builder.Services.AddScoped<LoginService>();
-builder.Services.AddHttpContextAccessor();  
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 builder.Services.AddTransient<SessionValidationMiddleware>();
 
 /*builder.Services.AddAuthentication(options =>
@@ -49,7 +50,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 
