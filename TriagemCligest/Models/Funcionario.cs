@@ -27,7 +27,9 @@ namespace TriagemCligest.Models
         [Column("cargo")]
         public int? Cargo { get; private set; }
 
-        public int? Especialidade { get; private set; }
+        [Column("Especialidade")]
+        public int? EspecialidadeId { get; set; }
+        public Especialidade? Especialidade { get; set; }
         [Column("escalão")]
         public int? Escalao { get; private set; }
         [Column("login")]

@@ -21,9 +21,13 @@ namespace TriagemCligest.Controllers
         }
 
         // GET: Utentes
-        public IActionResult Index()
+        public ActionResult<IEnumerable<Utente>> Index(string search)
         {
-              return View(_context.FindAll());
+              return _context.FindBySearch(search);
+        }
+        public ActionResult<Utente> GetFromID(int? id)
+        {
+              return _context.FindById(id.Value);
         }
 
     }

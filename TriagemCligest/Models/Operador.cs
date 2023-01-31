@@ -10,7 +10,7 @@ namespace TriagemCligest.Models
         public int ID { get; private set; }
         [Column("User_name")]
         public string? UserName { get; private set; }
-
+        
         public int? Cargo { get; private set; }
         [Column("Escalão")]
         public string? Escalao { get; private set; }

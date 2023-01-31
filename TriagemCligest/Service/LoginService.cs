@@ -20,32 +20,38 @@ namespace TriagemCligest.Service
         public Utilizador CheckUserCredentials(string username, string password)
         {
             Utilizador utilizador = null;
-            var operador = Operador.FirstOrDefault(o => o.Login == username && o.Password == password);
+            var operador = _context.Operador
+                
+                .FirstOrDefault(o => o.Login == username && o.Password == password);
 
             if (operador != null)
             {
                 utilizador = new()
                 {
                     Id = operador.ID,
-                    Nome = operador.UserName,
+                    Nome = "Enf(a). " + operador.UserName,
                     Senha = operador.Password,
                     Funcao = Models.Enum.Funcao.OPERADOR,
+                    IdEspecializade = -1,
+                    Especializade = "Enfemeiro",
                 };
                 return utilizador;
             }
 
-            var funcionario = Funcionario.FirstOrDefault(o => o.Login == username && o.Password == password);
+            var funcionario = _context.Funcionario
+                .Include(e => e.Especialidade)
+                .FirstOrDefault(o => o.Login == username && o.Password == password);
 
             if (funcionario != null)
             {
                 utilizador = new()
                 {
                     Id = funcionario.ID,
-                    Nome = funcionario.NomeAbreviado,
+                    Nome = "Dr(a). " + funcionario.NomeAbreviado,
                     Senha = funcionario.Password,
                     Funcao = Models.Enum.Funcao.FUNCIONARIO,
-                    IdEspecializade = funcionario.Especialidade,
-                    //Especializade = _context.Especialidade.FirstOrDefault(e => e.Id == funcionario.Especialidade).Esp
+                    IdEspecializade = funcionario.EspecialidadeId,
+                    Especializade = funcionario.Especialidade.Esp,
                 };
                 return utilizador;
             }

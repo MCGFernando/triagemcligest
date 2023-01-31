@@ -24,6 +24,9 @@ namespace TriagemCligest.Controllers
         // GET: Marcacaos
         public IActionResult Index()
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(_context.FindAll());
         }
 
@@ -39,8 +42,23 @@ namespace TriagemCligest.Controllers
             TempData["IdFuncionario"] = marcacao.IDCentro;
             TempData["Especialidade"] = marcacao.Especialidade;
             TempData["IdMarcacao"] = marcacao.ID;
-            
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return RedirectToAction("Create", "Triagems");
+        }
+
+        public Utilizador GetObjectFromSession()
+        {
+            string serializedObject = HttpContext.Session.GetString("Utilizador");
+            return JsonConvert.DeserializeObject<Utilizador>(serializedObject);
+        }
+
+        public void SetViewBags(Utilizador utilizador)
+        {
+            ViewBag.Funcao = utilizador.Funcao;
+            ViewBag.UserEsp = utilizador.Especializade;
+            ViewBag.UserName = utilizador.Nome;
         }
     }
 }

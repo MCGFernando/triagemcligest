@@ -11,177 +11,206 @@
 <hr />
 <div class="row">
     <!--<div class="col-12 ">-->
-        <form asp-action="Create">
-            <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-action="Create">
+        <div asp-validation-summary="All" class="text-danger"></div>
 
 
-            <div class="cabecalho-container">
-                <div class="form-group">
-                    <input type="hidden" asp-for="MarcacaoID" class="form-control" />
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="form-group">
-                            <label asp-for="UtenteID" class="control-label"></label>
-                            <input asp-for="UtenteID" class="form-control" value="@Model.Utente.ID" readonly required />
-                        </div>
+        <div class="cabecalho-container">
+            <div class="form-group">
+                <input type="hidden" asp-for="MarcacaoID" class="form-control" />
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="UtenteID" class="control-label"></label>
+                        @if (Model == null)
+                        {
+                            <input asp-for="UtenteID" class="form-control" id="id" readonly required />
+                        }
+                        else
+                        {
+                            <input asp-for="UtenteID" class="form-control" value=@Model.Utente.ID readonly required />
+                        }
+
                     </div>
-                    <div class="col-lg-5 col-md-8 col-sm-12">
+                </div>
+                <div class="col-lg-5 col-md-8 col-sm-12">
+                    @if (Model == null)
+                    {
+                        <div class="form-group">
+                            <label asp-for="Utente.Nome" class="control-label">Nome do Utente</label>
+                            <input asp-for="Utente.Nome" class="form-control" onkeyup="javascript:search(this.value)" id="nome" />
+                            <span id="resultado" style="position:absolute">
+                                <div class="list-group seach-list-group" id="seach-list-group" style="position:relative; z-index:1; display:none">
+                                </div>
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
                         <div class="form-group">
                             <label asp-for="Utente.Nome" class="control-label"></label>
                             <input asp-for="Utente.Nome" class="form-control" readonly required />
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label">Idade</label>
+                    }
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Idade</label>
+                        @if (Model == null)
+                        {
+                            <input class="form-control" id="nascimento"/>
+                        }
+                        else
+                        {
                             <input value="@Model.Utente.GetIdade()" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-8 col-sm-12">
-                        <div class="form-group">
-                            <label asp-for="TipoTriagem" class="control-label"></label>
-                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem"></select>
-                            <span asp-validation-for="TipoTriagem" class="text-danger"></span>
-                        </div>
+                        }
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label asp-for="HoraChegada" class="control-label"></label>
-                            <input asp-for="HoraChegada" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
-                            <span asp-validation-for="HoraChegada" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label asp-for="HoraAcolhimento" class="control-label"></label>
-                            <input asp-for="HoraAcolhimento" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
-                            <span asp-validation-for="HoraAcolhimento" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label asp-for="HoraAtendimentoMedico" class="control-label"></label>
-                            <input asp-for="HoraAtendimentoMedico" class="form-control" />
-                            <span asp-validation-for="HoraAtendimentoMedico" class="text-danger"></span>
-                        </div>
+                <div class="col-lg-2 col-md-8 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="TipoTriagem" class="control-label"></label>
+                        <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem"></select>
+                        <span asp-validation-for="TipoTriagem" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label asp-for="SituacaoQueixa" class="control-label"></label>
-                            <textarea asp-for="SituacaoQueixa" class="form-control"></textarea>
-                            <span asp-validation-for="SituacaoQueixa" class="text-danger"></span>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="HoraChegada" class="control-label"></label>
+                        <input asp-for="HoraChegada" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
+                        <span asp-validation-for="HoraChegada" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="TensaoArterialSitolica" class="control-label"></label>
-                            <input asp-for="TensaoArterialSitolica" class="form-control" />
-                            <span asp-validation-for="TensaoArterialSitolica" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="TensaoArterialDiastolica" class="control-label"></label>
-                            <input asp-for="TensaoArterialDiastolica" class="form-control" />
-                            <span asp-validation-for="TensaoArterialDiastolica" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label asp-for="ClassificacaoTensaoArterial" class="control-label"></label>
-                            <select asp-for="ClassificacaoTensaoArterial" asp-items="Html.GetEnumSelectList<ClassificacaoTensaoArterial>()" class="form-control"></select>
-                            <span asp-validation-for="ClassificacaoTensaoArterial" class="text-danger"></span>
-                        </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="HoraAcolhimento" class="control-label"></label>
+                        <input asp-for="HoraAcolhimento" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
+                        <span asp-validation-for="HoraAcolhimento" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="FrequeciaCardiaca" class="control-label"></label>
-                            <input asp-for="FrequeciaCardiaca" class="form-control" />
-                            <span asp-validation-for="FrequeciaCardiaca" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="ClassificacaoFrequenciaCardiaca" class="control-label"></label>
-                            <select asp-for="ClassificacaoFrequenciaCardiaca" asp-items="Html.GetEnumSelectList<ClassificacaoFrequenciaCardiaca>()" class="form-control"></select>
-                            <span asp-validation-for="ClassificacaoFrequenciaCardiaca" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="Temperatura" class="control-label"></label>
-                            <input asp-for="Temperatura" class="form-control" />
-                            <span asp-validation-for="Temperatura" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="ClassificacaoTemperatura" class="control-label"></label>
-                            <select asp-for="ClassificacaoTemperatura" asp-items="Html.GetEnumSelectList<ClassificacaoTemperatura>()" class="form-control"></select>
-                            <span asp-validation-for="ClassificacaoTemperatura" class="text-danger"></span>
-                        </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="HoraAtendimentoMedico" class="control-label"></label>
+                        <input asp-for="HoraAtendimentoMedico" class="form-control" />
+                        <span asp-validation-for="HoraAtendimentoMedico" class="text-danger"></span>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label asp-for="FrequeciaRespiratoria" class="control-label"></label>
-                            <input asp-for="FrequeciaRespiratoria" class="form-control" />
-                            <span asp-validation-for="FrequeciaRespiratoria" class="text-danger"></span>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="SituacaoQueixa" class="control-label"></label>
+                        <textarea asp-for="SituacaoQueixa" class="form-control"></textarea>
+                        <span asp-validation-for="SituacaoQueixa" class="text-danger"></span>
                     </div>
-                    <div class="col-5">
-                        <div class="form-group">
-                            <label asp-for="ClassificacaoFrequenciaRespiratoria" class="control-label"></label>
-                            <select asp-for="ClassificacaoFrequenciaRespiratoria" asp-items="Html.GetEnumSelectList<ClassificacaoFrequenciaRespiratoria>()" class="form-control"></select>
-                            <span asp-validation-for="ClassificacaoFrequenciaRespiratoria" class="text-danger"></span>
-                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="TensaoArterialSitolica" class="control-label"></label>
+                        <input asp-for="TensaoArterialSitolica" class="form-control" />
+                        <span asp-validation-for="TensaoArterialSitolica" class="text-danger"></span>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label asp-for="Peso" class="control-label"></label>
-                            <input asp-for="Peso" class="form-control" />
-                            <span asp-validation-for="Peso" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="TensaoArterialDiastolica" class="control-label"></label>
+                        <input asp-for="TensaoArterialDiastolica" class="form-control" />
+                        <span asp-validation-for="TensaoArterialDiastolica" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="ClassificacaoTensaoArterial" class="control-label"></label>
+                        <select asp-for="ClassificacaoTensaoArterial" asp-items="Html.GetEnumSelectList<ClassificacaoTensaoArterial>()" class="form-control"></select>
+                        <span asp-validation-for="ClassificacaoTensaoArterial" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="FrequeciaCardiaca" class="control-label"></label>
+                        <input asp-for="FrequeciaCardiaca" class="form-control" />
+                        <span asp-validation-for="FrequeciaCardiaca" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="ClassificacaoFrequenciaCardiaca" class="control-label"></label>
+                        <select asp-for="ClassificacaoFrequenciaCardiaca" asp-items="Html.GetEnumSelectList<ClassificacaoFrequenciaCardiaca>()" class="form-control"></select>
+                        <span asp-validation-for="ClassificacaoFrequenciaCardiaca" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="Temperatura" class="control-label"></label>
+                        <input asp-for="Temperatura" class="form-control" />
+                        <span asp-validation-for="Temperatura" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="ClassificacaoTemperatura" class="control-label"></label>
+                        <select asp-for="ClassificacaoTemperatura" asp-items="Html.GetEnumSelectList<ClassificacaoTemperatura>()" class="form-control"></select>
+                        <span asp-validation-for="ClassificacaoTemperatura" class="text-danger"></span>
                     </div>
                 </div>
             </div>
 
-            <div id="partials-container">
-                <div id="0" class="tipo-triagem" data-tipo="0" style="display:none"><partial name="_TriagemClinicaGeralPartial" model="Model" /></div>
-                <div id="1" class="tipo-triagem" data-tipo="1" style="display:none"><partial name="_TriagemPediatriaPartial" model="Model" /></div>
-                <div id="2" class="tipo-triagem" data-tipo="2" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
-                <div id="3" class="tipo-triagem" data-tipo="3" style="display:none"><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="FrequeciaRespiratoria" class="control-label"></label>
+                        <input asp-for="FrequeciaRespiratoria" class="form-control" />
+                        <span asp-validation-for="FrequeciaRespiratoria" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-group">
+                        <label asp-for="ClassificacaoFrequenciaRespiratoria" class="control-label"></label>
+                        <select asp-for="ClassificacaoFrequenciaRespiratoria" asp-items="Html.GetEnumSelectList<ClassificacaoFrequenciaRespiratoria>()" class="form-control"></select>
+                        <span asp-validation-for="ClassificacaoFrequenciaRespiratoria" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="Peso" class="control-label"></label>
+                        <input asp-for="Peso" class="form-control" />
+                        <span asp-validation-for="Peso" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div id="partials-container">
+            <div id="0" class="tipo-triagem" data-tipo="0" style="display:none"><partial name="_TriagemClinicaGeralPartial" model="Model" /></div>
+            <div id="1" class="tipo-triagem" data-tipo="1" style="display:none"><partial name="_TriagemPediatriaPartial" model="Model" /></div>
+            <div id="2" class="tipo-triagem" data-tipo="2" style="display:none"><partial name="_TriagemObstericiaPartial" model="Model" /></div>
+            <div id="3" class="tipo-triagem" data-tipo="3" style="display:none"><partial name="_TriagemGinecologiaPartial" model="Model" /></div>
+        </div>
 
 
-            <div class="rodape-container">
-                <div class="form-group">
-                    <label asp-for="ClassificacaoTriagem" class="control-label"></label>
-                    <select asp-for="ClassificacaoTriagem" asp-items="Html.GetEnumSelectList<ClassificacaoTriagem>()" class="form-control"></select>
-                    <span asp-validation-for="ClassificacaoTriagem" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-
-                    <input type="hidden" asp-for="EstadoTriagem" value="@EstadoTriagem.REALIZADA" class="form-control" />
-                    <input type="hidden" asp-for="DatarRgisto" value="@DateTime.Today" class="form-control" />
-                    <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit" />
-                </div>
+        <div class="rodape-container">
+            <div class="form-group">
+                <label asp-for="ClassificacaoTriagem" class="control-label"></label>
+                <select asp-for="ClassificacaoTriagem" asp-items="Html.GetEnumSelectList<ClassificacaoTriagem>()" class="form-control"></select>
+                <span asp-validation-for="ClassificacaoTriagem" class="text-danger"></span>
             </div>
-        </form>
+            <div class="form-group">
+
+                <input type="hidden" asp-for="EstadoTriagem" value="@EstadoTriagem.REALIZADA" class="form-control" />
+                <input type="hidden" asp-for="DatarRgisto" value="@DateTime.Today" class="form-control" />
+                <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit" />
+            </div>
+        </div>
+    </form>
     <!--</div>-->
 </div>
 
@@ -287,6 +316,20 @@
             }
         });
 
+        document.getElementById('resultado').addEventListener('click', function (event) {
+            event.preventDefault()
+            if (event.target.matches('.list-group-item-action')) {
+                const dataId = event.target.getAttribute('data-idUtente');
+                return fetch("/Utentes/GetFromID?id=" + dataId)
+                    .then(res => res.json())
+                    .then(data => {
+                        $("#id").val(data['id'])
+                        $("#nome").val(data['nome'])
+                        $("#nascimento").val(calculateAge(new Date(data['dataNascimento'])))
+                        $('#seach-list-group').hide()
+                    }).catch(err => console.log(err))
+            }
+        })
     });
 
     function ValidaTipoTriagem() {
@@ -297,6 +340,23 @@
             }
         })
     }
-     
+    function search(input) {
+        return fetch("/Utentes/Index?search=" + input)
+            .then(res => res.json())
+            .then(data => {
+                let html = ''
+                $('#seach-list-group').show()
+                for (let i = 0; i < data.length; i++) {
+                    html += '<a href="#" class="list-group-item list-group-item-action" data-idUtente=\'' + data[i].id + '\'>' + data[i].nome + '</a>'
+                }
+                $('#seach-list-group').html(html)
+            }).catch(err => console.log(err))
+    }
+
+    function calculateAge(birthday) {
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 
 </script>

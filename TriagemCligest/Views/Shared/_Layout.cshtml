@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using TriagemCligest.Models.Enum
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TriagemCligest.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -23,9 +25,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Marcacaos" asp-action="Index">Marcações</a>
-                        </li>
+                        @{
+                            if (ViewBag.Funcao != Funcao.FUNCIONARIO)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Marcacaos" asp-action="Index">Marcações</a>
+                                </li>
+                            }
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Triagems" asp-action="Index">Triagem</a>
                         </li>

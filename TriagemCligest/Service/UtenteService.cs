@@ -24,7 +24,9 @@ namespace TriagemCligest.Service
         public List<Utente> FindBySearch(string search)
         {
             
-            return _context.Utente.Where(u => u.Nome.Contains(search)).ToList();
+            return _context.Utente.Where(u => u.Nome.Contains(search))
+                .Take(10)
+                .ToList();
         }
         private bool UtenteExists(int id)
         {

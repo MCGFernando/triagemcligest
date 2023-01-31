@@ -10,14 +10,31 @@
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            Console.WriteLine("Midleware");
+            Console.WriteLine("Midleware" + context.Response.StatusCode);
             var session = _httpContextAccessor.HttpContext.Session;
-            if (session.GetString("Utilizador") == null)
+            if (context.Response.StatusCode == 403)
             {
-                Console.WriteLine("Midleware Nao Autenticado");
-                context.Response.Redirect("Login");
-                return;
+                if (session.GetString("Utilizador") == null)
+                {
+                    Console.WriteLine("Midleware Nao Autenticado1 ");
+                    context.Response.StatusCode = 403;
+                    context.Response.Redirect("Login/Inde");
+                    return;
+                }
             }
+
+            /*if (context.Response.StatusCode == 200)
+            {
+                if (session.GetString("Utilizador") == null)
+                {
+                    Console.WriteLine("Midleware Nao Autenticado2 ");
+                    context.Response.StatusCode = 403;
+                    context.Response.Redirect("Login/Inde");
+                    return;
+                }
+                else { context.Response.StatusCode = 200; }
+            }*/
+
             await next(context);
         }
     }

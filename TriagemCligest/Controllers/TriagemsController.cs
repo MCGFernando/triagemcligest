@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc;
+using Newtonsoft.Json;
 using TriagemCligest.Data;
 using TriagemCligest.Models;
 using TriagemCligest.Service;
@@ -39,6 +40,11 @@ namespace TriagemCligest.Controllers
                 triagem.Utente = item.b;
                 lstTriagem.Add(triagem);
             }
+
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+
             return View(lstTriagem);
         }
 
@@ -55,6 +61,9 @@ namespace TriagemCligest.Controllers
                 triagem.Utente = item.b;
                 lstTriagem.Add(triagem);
             }
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(lstTriagem);
         }
 
@@ -81,7 +90,9 @@ namespace TriagemCligest.Controllers
                 return NotFound();
             }
             triagem.Utente = result.Select(x => x.b).FirstOrDefault();
-
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -91,9 +102,12 @@ namespace TriagemCligest.Controllers
             //ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID");
             //ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID");
 
-            if (TempData["IdUtente"] == null) return RedirectToAction("Index", "Marcacaos");
+            if (TempData["IdUtente"] == null) return View();
             var utente = _contextUtente.FindById((int)TempData["IdUtente"]);
             Triagem triagem = new() { Utente = utente, MarcacaoID = (int)TempData["IdMarcacao"] };
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -112,6 +126,9 @@ namespace TriagemCligest.Controllers
             }
             ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
             ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -134,7 +151,9 @@ namespace TriagemCligest.Controllers
                 return NotFound();
             }
             triagem.Utente = result.Select(x => x.b).FirstOrDefault();
-            
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -172,6 +191,9 @@ namespace TriagemCligest.Controllers
             }
             ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
             ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -191,7 +213,9 @@ namespace TriagemCligest.Controllers
             {
                 return NotFound();
             }
-
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return View(triagem);
         }
 
@@ -211,12 +235,28 @@ namespace TriagemCligest.Controllers
             }
 
             await _context.SaveChangesAsync();
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             return RedirectToAction(nameof(Index));
         }
 
         private bool TriagemExists(int id)
         {
             return _context.Triagem.Any(e => e.Id == id);
+        }
+
+        public Utilizador GetObjectFromSession()
+        {
+            string serializedObject = HttpContext.Session.GetString("Utilizador");
+            return JsonConvert.DeserializeObject<Utilizador>(serializedObject);
+        }
+
+        public void SetViewBags(Utilizador utilizador)
+        {
+            ViewBag.Funcao = utilizador.Funcao;
+            ViewBag.UserEsp = utilizador.Especializade;
+            ViewBag.UserName = utilizador.Nome;
         }
     }
 }

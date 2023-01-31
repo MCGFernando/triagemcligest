@@ -12,7 +12,7 @@
         <div class="row d-flex align-items-end">
             <div class="col-4">
                 <label class="form-label">Pesquisa</label>
-                <input type="text" class="form-control" name="search"/>
+                <input type="text" class="form-control" name="search" />
             </div>
             <div class="col-2">
                 <label class="form-label">Hora de Chegada</label>
@@ -104,7 +104,12 @@
                         <div class="dropdown-menu">
                             <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Edit</a>
                             <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Details</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Delete</a>
+                            @{
+                                if (ViewBag.Funcao != Funcao.FUNCIONARIO)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Delete</a>
+                                }
+                            }
                         </div>
                     </div>
                 </td>

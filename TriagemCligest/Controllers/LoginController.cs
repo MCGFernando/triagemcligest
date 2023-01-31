@@ -18,6 +18,7 @@ namespace TriagemCligest.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
