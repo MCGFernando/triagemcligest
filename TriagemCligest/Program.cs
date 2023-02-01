@@ -24,15 +24,14 @@ builder.Services.AddScoped<OperadorService>();
 builder.Services.AddScoped<UtenteService>();
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSession();
-builder.Services.AddTransient<SessionValidationMiddleware>();
+//builder.Services.AddSession();
+//builder.Services.AddTransient<SessionValidationMiddleware>();
 
-/*builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", config =>
 {
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie();*/
+    config.Cookie.Name = "Credenciais";
+    config.LoginPath = "/Login/Index";
+});
 
 var app = builder.Build();
 
@@ -50,7 +49,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession();
+//app.UseSession();
 app.UseAuthorization();
 
 
@@ -58,6 +57,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
 
-app.UseMiddleware<SessionValidationMiddleware>();
+//app.UseMiddleware<SessionValidationMiddleware>();
 
 app.Run();

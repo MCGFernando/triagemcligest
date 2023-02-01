@@ -29,8 +29,9 @@ namespace TriagemCligest.Controllers
             {
                 return View(nameof(Index));
             }
-            string serializedObject = JsonConvert.SerializeObject(user);
-            HttpContext.Session.SetString("Utilizador", serializedObject);
+            //string serializedObject = JsonConvert.SerializeObject(user);
+            //HttpContext.Session.SetString("Utilizador", serializedObject); 
+            Console.WriteLine("Chegou");
             return RedirectToAction("Index", "Home");
         }
 

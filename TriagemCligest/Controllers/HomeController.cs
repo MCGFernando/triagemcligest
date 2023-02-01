@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using TriagemCligest.Models;
@@ -14,7 +15,7 @@ namespace TriagemCligest.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             var utilizador = GetObjectFromSession();
