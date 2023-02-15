@@ -15,7 +15,7 @@ namespace TriagemCligest.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
+        
         public IActionResult Index()
         {
             var utilizador = GetObjectFromSession();

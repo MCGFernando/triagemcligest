@@ -26,6 +26,13 @@ namespace TriagemCligest.Controllers
         {
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
+
+            if (utilizador.Funcao == Models.Enum.Funcao.FUNCIONARIO)
+            {
+                HttpContext.Session.Remove("Utilizador");
+                return RedirectToAction("Index", "Logins");
+            }
+
             SetViewBags(utilizador);
             return View(_context.FindAll());
         }

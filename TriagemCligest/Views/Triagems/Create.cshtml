@@ -15,7 +15,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
 
 
-        <div class="cabecalho-container">
+        <div class="cabecalho-container" id="cabecalho-container">
             <div class="form-group">
                 <input type="hidden" asp-for="MarcacaoID" class="form-control" />
             </div>
@@ -25,7 +25,7 @@
                         <label asp-for="UtenteID" class="control-label"></label>
                         @if (Model == null)
                         {
-                            <input asp-for="UtenteID" class="form-control" id="id" readonly required />
+                            <input asp-for="UtenteID" class="form-control" id="id" value= readonly required />
                         }
                         else
                         {
@@ -320,14 +320,28 @@
             event.preventDefault()
             if (event.target.matches('.list-group-item-action')) {
                 const dataId = event.target.getAttribute('data-idUtente');
-                return fetch("/Utentes/GetFromID?id=" + dataId)
+                window.location.assign('/Triagems/Create?id=' + dataId)
+                /*$.get('Triagems/CreateFromNull?id=' + dataId, function (response, status) {
+                    $('#seach-list-group').hide()
+                })*/
+
+                /*$.get("/Utentes/GetFromID?id=" + dataId, function(response, status){
+                    console.log("response", response)
+                    $("#id").val(response['id'])
+                    $("#nome").val(response['nome'])
+                    $("#nascimento").val(calculateAge(new Date(response['dataNascimento'])))
+                    $('#seach-list-group').hide()
+                })*/
+
+
+                /*return fetch("/Utentes/GetFromID?id=" + dataId)
                     .then(res => res.json())
                     .then(data => {
                         $("#id").val(data['id'])
                         $("#nome").val(data['nome'])
                         $("#nascimento").val(calculateAge(new Date(data['dataNascimento'])))
                         $('#seach-list-group').hide()
-                    }).catch(err => console.log(err))
+                    }).catch(err => console.log(err))*/
             }
         })
     });

@@ -9,16 +9,17 @@ namespace TriagemCligest.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly LoginService _context;
+        private readonly LoginService _context; 
+        private readonly ILogger<HomeController> _logger;
 
-        public LoginController(LoginService context)
+        public LoginController(LoginService context, ILogger<HomeController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            
             return View();
         }
 
@@ -29,8 +30,8 @@ namespace TriagemCligest.Controllers
             {
                 return View(nameof(Index));
             }
-            //string serializedObject = JsonConvert.SerializeObject(user);
-            //HttpContext.Session.SetString("Utilizador", serializedObject); 
+            string serializedObject = JsonConvert.SerializeObject(user);
+            HttpContext.Session.SetString("Utilizador", serializedObject); 
             Console.WriteLine("Chegou");
             return RedirectToAction("Index", "Home");
         }

@@ -59,6 +59,7 @@ namespace TriagemCligest.Controllers
             {
                 Triagem triagem = item.a;
                 triagem.Utente = item.b;
+                triagem.UtenteID = item.b.ID;
                 lstTriagem.Add(triagem);
             }
             var utilizador = GetObjectFromSession();
@@ -97,19 +98,20 @@ namespace TriagemCligest.Controllers
         }
 
         // GET: Triagems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            //ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID");
-            //ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID");
-
-            if (TempData["IdUtente"] == null) return View();
-            var utente = _contextUtente.FindById((int)TempData["IdUtente"]);
-            Triagem triagem = new() { Utente = utente, MarcacaoID = (int)TempData["IdMarcacao"] };
+            if (TempData["IdUtente"] == null && id == null) return View();
+            var utenteID = TempData["IdUtente"] == null ? id.Value : (int)TempData["IdUtente"];
+            var marcacaoID = TempData["IdUtente"] == null ? 1 : (int)TempData["IdMarcacao"];
+            var utente = _contextUtente.FindById(utenteID);
+            Triagem triagem = new() { Utente = utente, MarcacaoID = marcacaoID };
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
             SetViewBags(utilizador);
             return View(triagem);
         }
+
+        
 
         // POST: Triagems/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
