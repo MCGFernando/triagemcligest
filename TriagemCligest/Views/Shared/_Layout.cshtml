@@ -38,6 +38,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Triagems" asp-action="Index">Triagem</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav d-flex justify-content-end">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="FecharSessao" asp-action="Index">Sair</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -50,7 +55,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - TriagemCligest - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - @DateTime.Now.Year Cligest All Rights Reserved.
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

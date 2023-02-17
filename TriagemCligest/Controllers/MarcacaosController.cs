@@ -44,7 +44,7 @@ namespace TriagemCligest.Controllers
 
             //Console.WriteLine("IdUtente " + marcacao.IDutente);
             //Console.WriteLine("IdFuncionario " + marcacao.IDCentro);
-
+            
             TempData["IdUtente"] = marcacao.IDutente;
             TempData["IdFuncionario"] = marcacao.IDCentro;
             TempData["Especialidade"] = marcacao.Especialidade;

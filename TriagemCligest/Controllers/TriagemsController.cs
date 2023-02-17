@@ -18,12 +18,15 @@ namespace TriagemCligest.Controllers
         private readonly TriagemContext _context;
         private readonly UtenteService _contextUtente;
         private readonly MarcacaoService _contextMarcacao;
+        private readonly TriagemService _contextTriagem;
 
-        public TriagemsController(TriagemContext context, UtenteService contextUtente, MarcacaoService contextMarcacao)
+
+        public TriagemsController(TriagemContext context, UtenteService contextUtente, MarcacaoService contextMarcacao, TriagemService contextTriagem)
         {
             _context = context;
             _contextUtente = contextUtente;
             _contextMarcacao = contextMarcacao;
+            _contextTriagem = contextTriagem;   
         }
 
         // GET: Triagems
@@ -51,17 +54,8 @@ namespace TriagemCligest.Controllers
         public async Task<IActionResult> GroupingSearch(string? search)
         {
             if (search == null) return RedirectToAction(nameof(Index));
-            var qryTriagem = _context.Triagem.ToList();
-            var qryUtente = _contextUtente.FindBySearch(search);
-            var result = from a in qryTriagem join b in qryUtente on a.UtenteID equals b.ID select new { a, b };
-            List<Triagem> lstTriagem = new List<Triagem>();
-            foreach (var item in result)
-            {
-                Triagem triagem = item.a;
-                triagem.Utente = item.b;
-                triagem.UtenteID = item.b.ID;
-                lstTriagem.Add(triagem);
-            }
+            
+            List<Triagem> lstTriagem = _contextTriagem.FindBySearch(search);   
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
             SetViewBags(utilizador);
@@ -104,6 +98,7 @@ namespace TriagemCligest.Controllers
             var utenteID = TempData["IdUtente"] == null ? id.Value : (int)TempData["IdUtente"];
             var marcacaoID = TempData["IdUtente"] == null ? 1 : (int)TempData["IdMarcacao"];
             var utente = _contextUtente.FindById(utenteID);
+           
             Triagem triagem = new() { Utente = utente, MarcacaoID = marcacaoID };
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");

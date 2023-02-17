@@ -28,6 +28,7 @@ namespace TriagemCligest.Controllers
             var user = _context.CheckUserCredentials(utilizador.Nome, utilizador.Senha);
             if (user == null)
             {
+                TempData["fail"] = "fail";
                 return View(nameof(Index));
             }
             string serializedObject = JsonConvert.SerializeObject(user);
