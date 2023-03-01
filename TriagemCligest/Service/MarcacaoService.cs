@@ -23,6 +23,13 @@ namespace TriagemCligest.Service
             return _context.Marcacao.FirstOrDefault(e => e.ID == id);
         }
 
+        public List<Marcacao> FindBySeach(string? Pesquisar)
+        {
+            var result = from obj in _context.Marcacao select obj;
+            result = result.Where(m => m.Datam == DateTime.Today && m.Utente.Contains(Pesquisar));
+            return result.ToList();
+        }
+
         private bool MarcacaoExists(int id)
         {
             return _context.Marcacao.Any(e => e.ID == id);

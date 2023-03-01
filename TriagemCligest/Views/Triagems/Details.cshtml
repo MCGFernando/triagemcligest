@@ -1,5 +1,5 @@
 ﻿@model TriagemCligest.Models.Triagem
-
+@using TriagemCligest.Models.Enum
 @{
     ViewData["Title"] = "Detalhes de Triagem";
 }
@@ -9,11 +9,29 @@
 <div>
     <h4>Triagem</h4>
     <hr />
-    <p><a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a></p>
+    <div class="d-flex justify-content-between p-1">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary ">Editar</a>
+        @{
+
+            if (Model.EstadoTriagem == EstadoTriagem.ENCERRADA || ViewBag.Funcao == Funcao.OPERADOR)
+            {
+                <button type="button" class="btn btn-primary disabled disabled-button" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
+                    Encerrar
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    Encerrar
+                </button>
+            }
+        }
+    </div>
+
     <div class="row">
         <div class="col-6">
             <div class="card">
-                <div class="card-header">Header</div>
+                <div class="card-header">Resumo de Triagem</div>
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-5">
@@ -86,10 +104,11 @@
         </div>
         <div class="col-6">
             <div class="card">
-                <div class="card-header">Header</div>
-                <div class="card-body">Content</div>
+                <div class="card-header">Anamenese</div>
+                <div class="card-body">
+                </div>
 
-                <div class="card-footer">Footer</div>
+                <div class="card-footer"></div>
             </div>
         </div>
     </div>
@@ -155,26 +174,49 @@
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para listagem</a>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Encerrar Triagem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Atenção! Está acção vai encerrar esta triagem. Deseja continuar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <form asp-action="Encerrar">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <!-- <a asp-action="Encerrar" asp-route-id="@Model?.Id" class="btn btn-primary ">Continuar</a>-->
+                    <input type="submit" value="Continuar" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-   /* $(function () {
-        alert('Esta a funcionar')
-        ValidaTipoTriagem()
-    });
+    /* $(function () {
+         alert('Esta a funcionar')
+         ValidaTipoTriagem()
+     });
 
-    function ValidaTipoTriagem() {
-        console.log($('partial'))
+     function ValidaTipoTriagem() {
+         console.log($('partial'))
 
-        $('.tipo-triagem').each(function () {
-            console.log($(this).data("tipo"))
-            $(this).hide()
-            console.log("aqui", $('#tipoTriagem').val())
-            if ($('#tipoTriagem').val() == $(this).data("tipo")) {
-                $(this).show()
-            }
-        })
-    }
+         $('.tipo-triagem').each(function () {
+             console.log($(this).data("tipo"))
+             $(this).hide()
+             console.log("aqui", $('#tipoTriagem').val())
+             if ($('#tipoTriagem').val() == $(this).data("tipo")) {
+                 $(this).show()
+             }
+         })
+     }
 
-    */
+     */
 </script>

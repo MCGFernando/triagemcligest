@@ -163,10 +163,13 @@ namespace TriagemCligest.Models
         public DateTime? DatarRgisto { get; set; }
         public DateTime DatarActualizacao { get; set; } = DateTime.Now;
         [Display(Name = "Hora de Chegada")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm\\:ss}")]
         public TimeSpan? HoraChegada { get; set; }
         [Display(Name = "Hora do Atendimento Médico")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm\\:ss}")]
         public TimeSpan? HoraAtendimentoMedico { get; set; }
         [Display(Name = "Hora do Acolhimento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm\\:ss}")]
         public TimeSpan? HoraAcolhimento { get; set; }
         [Display(Name = "Classificação da Triagem")]
         [Required(ErrorMessage = "O Campo {0} é Obrigatório")]

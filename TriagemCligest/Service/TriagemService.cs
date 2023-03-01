@@ -1,5 +1,6 @@
 ﻿using TriagemCligest.Data;
 using TriagemCligest.Models;
+using TriagemCligest.Service.Exception;
 
 namespace TriagemCligest.Service
 {
@@ -63,6 +64,22 @@ namespace TriagemCligest.Service
             Triagem triagem = result.Select(x => x.a).FirstOrDefault();
             triagem.Utente = result.Select(x => x.b).FirstOrDefault();
             return triagem;
+        }
+        public void Update(Triagem triagem) 
+        {
+            if (!_context.Triagem.Any(t => t.Id == triagem.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try
+            {
+                _context.Update(triagem);   
+                _context.SaveChanges();
+            }
+            catch (DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

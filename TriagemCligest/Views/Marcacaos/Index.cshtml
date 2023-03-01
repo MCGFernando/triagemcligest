@@ -2,24 +2,40 @@
 
 @{
     ViewData["Title"] = "Lista de Marcações";
+    Pager pager = new Pager();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.PaginaAtual;
+    }
 }
 
 <h1>@ViewData["Title"]</h1>
 <hr />
 
 <div class="row">
-    <div class="col-6">
-        <label class="form-label">Pesquisa</label>
-        <input type="text" class="form-control" />
-    </div>
-    <div class="col-3">
-        <label class="form-label">Data Início</label>
-        <input type="date" class="form-control" />
-    </div>
-    <div class="col-3">
-        <label class="form-label">Data Fim</label>
-        <input type="date" class="form-control" />
-    </div>
+    <form asp-action="Index">
+        <div class="row d-flex align-items-end">
+            <div class="col-6">
+                <label class="form-label">Pesquisa</label>
+                <input type="text" class="form-control" name="Pesquisar" />
+            </div>
+            <div class="col-2">
+                <label class="form-label">Data Início</label>
+                <input type="date" class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="form-label">Data Fim</label>
+                <input type="date" class="form-control" />
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <input type="submit" value="Pesquisar" class="btn btn-secondary" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <table class="table">
@@ -93,3 +109,18 @@
         }
     </tbody>
 </table>
+
+<nav aria-label="Page navigation example">
+    @if (pager.PaginasTotal > 0)
+    {
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+            @for (var pge = pager.PaginaInicio; pge <= pager.PaginaFim; pge++)
+            {
+                <li class="page-item @(pge==pager.PaginaAtual ? "active" : "")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@pge">@pge</a></li>
+            }
+            <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+        </ul>
+    }
+
+</nav>

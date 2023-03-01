@@ -38,3 +38,11 @@ body {
         border-bottom-right-radius: .3rem;
     }
 }
+
+.disabled-button:hover {
+    cursor: not-allowed;
+}
+
+.menu-hover a:hover {
+    color: #C65059 !important;
+}

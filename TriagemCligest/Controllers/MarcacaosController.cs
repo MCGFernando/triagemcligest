@@ -22,8 +22,18 @@ namespace TriagemCligest.Controllers
         }
 
         // GET: Marcacaos
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string? Pesquisar, int page = 1)
         {
+            List<Marcacao> lstMarcacao = new();
+            Console.WriteLine("Pesquisar " + Pesquisar);
+            if (Pesquisar != null)
+            {
+                lstMarcacao = _context.FindBySeach(Pesquisar);
+            }
+            else
+            {
+                lstMarcacao = _context.FindAll();
+            }
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
 
@@ -33,8 +43,16 @@ namespace TriagemCligest.Controllers
                 return RedirectToAction("Index", "Logins");
             }
 
+            const int paginaTamanho = 10;
+            if (page < 1) page = 1;
+            int recordCount = lstMarcacao.Count();
+            var pager = new Pager(recordCount, page, paginaTamanho);
+            int recordSkip = (page - 1) * paginaTamanho;
+            var data = lstMarcacao.Skip(recordSkip).Take(pager.PaginaTamanho).ToList();
+            this.ViewBag.Pager = pager;
+
             SetViewBags(utilizador);
-            return View(_context.FindAll());
+            return View(data);
         }
 
         public IActionResult Triagem(int? id)
