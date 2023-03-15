@@ -25,7 +25,7 @@ namespace TriagemCligest.Service
         {
             
             return _context.Utente.Where(u => u.Nome.Contains(search))
-                .Take(10)
+                .Skip(10).Take(10)
                 .ToList();
         }
         private bool UtenteExists(int id)

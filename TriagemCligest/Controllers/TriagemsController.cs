@@ -43,10 +43,9 @@ namespace TriagemCligest.Controllers
             }
             else
             {
-                var queryTriagem = from t in _context.Triagem.ToList() select t;
-                var queryUtente = from u in _contextUtente.FindAll() select u;
-                var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID select new { a, b };
-
+                /*var queryTriagem = from t in _context.Triagem.ToList() select t;
+                var queryUtente = from u in _contextUtente.FindAll() select u;*/
+                var result = from a in _context.Triagem.ToList() join b in _contextUtente.FindAll() on a.UtenteID equals b.ID select new { a, b };
                 foreach (var item in result)
                 {
                     Triagem triagem = item.a;
@@ -95,9 +94,9 @@ namespace TriagemCligest.Controllers
                 .Include(t => t.Utente)
                 .FirstOrDefaultAsync(m => m.Id == id);*/
 
-            var queryTriagem = from t in _context.Triagem.ToList() select t;
-            var queryUtente = from u in _contextUtente.FindAll() select u;
-            var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
+            /*var queryTriagem = from t in _context.Triagem.ToList() select t;
+            var queryUtente = from u in _contextUtente.FindAll() select u;*/
+            var result = from a in _context.Triagem.ToList() join b in _contextUtente.FindAll() on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
             //result = result.Where(qt => qt.a.Id == id.Value);
             Triagem triagem = result.Select(x => x.a).FirstOrDefault();
             if (triagem == null)
@@ -157,9 +156,9 @@ namespace TriagemCligest.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não definido" });
             }
 
-            var queryTriagem = from t in _context.Triagem.ToList() select t;
-            var queryUtente = from u in _contextUtente.FindAll() select u;
-            var result = from a in queryTriagem join b in queryUtente on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
+            /*var queryTriagem = from t in _context.Triagem.ToList() select t;
+            var queryUtente = from u in _contextUtente.FindAll() select u;*/
+            var result = from a in _context.Triagem.ToList() join b in _contextUtente.FindAll() on a.UtenteID equals b.ID where a.Id == id.Value select new { a, b };
             //result = result.Where(qt => qt.a.Id == id.Value);
             Triagem triagem = result.Select(x => x.a).FirstOrDefault();
             //triagem.Utente = result.Select(x => x.b).FirstOrDefault();
