@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 using TriagemCligest.Models.Enum;
 
 namespace TriagemCligest.Models
@@ -9,12 +10,28 @@ namespace TriagemCligest.Models
     {
         public int Id { get; set; }
         public int UtenteID { get; set; }
+        public int Versao { get; set; } = 1;
         public Utente? Utente { get; set;}
         public int MarcacaoID { get; set; }
         public Marcacao? Marcacao { get; set; }
         [Display(Name = "Tipo de Ficha de Triagem")]
         [Required(ErrorMessage = "O Campo {0} é Obrigatório")]
-        public TipoTriagem TipoTriagem { get; set; }
+        public TipoFichaAtendimento TipoFichaAtendimento { get; set; }
+        public Accao Accao { get; set; } = Accao.CREATE;
+        [Display(Name = "Tipo de Triagem")]
+        public TipoTriagem TipoTriagem { get; set; } = TipoTriagem.ELECTIVO;
+        public EscalaDor EscalaDor { get; set; } = EscalaDor.LEVE;
+        
+        
+        public int IdOriginal { get; set; } = 0;
+        public int? EspecialidadeID { get; set; }
+        public EntidadeAssistida? EntidadeAssistida { get; set; }
+        public int? FunicionarioID { get; set; }
+        public int EntidadeAssistidaID { get; set; }
+        public int RegistadoPor { get; set; }
+        public int ActualizadoPor { get; set; }
+        public int AnuladoPor { get; set; }
+        //public int IdUtilizador { get; set; }
 
         [Display(Name ="Situação de Queixa")]
         [Required(ErrorMessage = "O Campo {0} é Obrigatório")]
@@ -159,9 +176,13 @@ namespace TriagemCligest.Models
         public ClassificacaoDiurese? ClassificacaoDiurese { get; set; }
         /*************************FIM TRIAGEM PEDIATRIA*****************************/
 
-        [Column("DataRegisto")]
-        public DateTime? DatarRgisto { get; set; }
-        public DateTime DatarActualizacao { get; set; } = DateTime.Now;
+       
+        [Display(Name = "Data Registo")]
+        public DateTime? DataRegisto { get; set; }
+        [Display(Name = "Data Actualização")]
+        public DateTime DataActualizacao { get; set; } = DateTime.Now;
+        [Display(Name = "Data Anulação")]
+        public DateTime? DataAnulacao { get; set; }
         [Display(Name = "Hora de Chegada")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm\\:ss}")]
         public TimeSpan? HoraChegada { get; set; }

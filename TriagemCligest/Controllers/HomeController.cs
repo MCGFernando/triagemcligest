@@ -39,6 +39,7 @@ namespace TriagemCligest.Controllers
 
         public void SetViewBags(Utilizador utilizador)
         {
+            ViewBag.Id = utilizador.Id;
             ViewBag.Funcao = utilizador.Funcao;
             ViewBag.UserEsp = utilizador.Especializade;
             ViewBag.UserName = utilizador.Nome;

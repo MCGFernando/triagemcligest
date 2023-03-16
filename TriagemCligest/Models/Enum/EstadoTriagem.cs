@@ -3,6 +3,7 @@
     public enum EstadoTriagem : int
     {
         REALIZADA = 1,
-        ENCERRADA = 2
+        ENCERRADA = 2,
+        ANULADA = 3
     }
 }

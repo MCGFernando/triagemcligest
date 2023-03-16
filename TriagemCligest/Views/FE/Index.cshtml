@@ -1,0 +1,299 @@
+﻿@model IEnumerable<TriagemCligest.Models.FE>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDeEmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatadoDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destinatario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destinatario2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultEXT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultUtente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultCoef)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFooter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autorizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idfuncionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipodeDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoDeEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Entidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kwanzas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proforma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDeEntrada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDeSaida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NdeProcesso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cambio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalKwanzas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFuncionarioLast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Integrado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoContaCorrente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuncionarioQueAdmitiu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDeEpisodio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marcacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CentroDeResponsabilidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ICD10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IvaTotal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDeEmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatadoDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinatario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinatario2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultEXT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultUtente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultCoef)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFooter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autorizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idfuncionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipodeDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoDeEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kwanzas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proforma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDeEntrada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDeSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NdeProcesso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cambio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalKwanzas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFuncionarioLast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Integrado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lancamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoContaCorrente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuncionarioQueAdmitiu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Operador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDeEpisodio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marcacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CentroDeResponsabilidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ICD10)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IvaTotal)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

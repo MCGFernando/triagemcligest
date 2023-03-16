@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TriagemCligest.Models
 {
@@ -10,7 +11,8 @@ namespace TriagemCligest.Models
         public int ID { get; private set; }
         public int? Especialidade { get; private set; }
         [Column("ID Centro")]
-        public int? IDCentro { get; private set; }
+        public int? FuncionarioID { get; private set; }
+        public Funcionario Funcionario { get; set; }
         [Column("ID utente")]
         public int? IDutente { get; private set; }
         public string? Utente { get; private set; }
@@ -24,6 +26,7 @@ namespace TriagemCligest.Models
         [Column("ID entidade")]
         public int? IDEntidade { get; private set; }
         public string? Entidade { get; private set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime? Horam { get; private set; }
         public DateTime? Datam { get; private set; }
         public bool? Encerrada { get; private set; }

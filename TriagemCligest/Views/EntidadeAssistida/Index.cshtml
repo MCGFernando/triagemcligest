@@ -1,0 +1,227 @@
+﻿@model IEnumerable<TriagemCligest.Models.EntidadeAssistida>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Entidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDeContracto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sigla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NDeContaCorrente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClienteExterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actualizada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Protocolo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDeAtendimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDeActualizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destinatario1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destinatario2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFooter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GestorDeConta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProtocoloFacturacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NDeContribuinte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPrecario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForceCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaskCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodeExample)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSerie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GeraFactura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cartao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checkup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flag1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flag2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDeContracto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sigla)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NDeContaCorrente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClienteExterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actualizada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Protocolo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDeAtendimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDeActualizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinatario1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinatario2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFooter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GestorDeConta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProtocoloFacturacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NDeContribuinte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPrecario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaskCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeExample)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeraFactura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cartao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Checkup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.USD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flag1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flag2)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

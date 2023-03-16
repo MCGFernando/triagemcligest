@@ -64,7 +64,7 @@ namespace TriagemCligest.Controllers
             //Console.WriteLine("IdFuncionario " + marcacao.IDCentro);
             
             TempData["IdUtente"] = marcacao.IDutente;
-            TempData["IdFuncionario"] = marcacao.IDCentro;
+            TempData["IdFuncionario"] = marcacao.FuncionarioID;
             TempData["Especialidade"] = marcacao.Especialidade;
             TempData["IdMarcacao"] = marcacao.ID;
             var utilizador = GetObjectFromSession();
@@ -81,6 +81,7 @@ namespace TriagemCligest.Controllers
 
         public void SetViewBags(Utilizador utilizador)
         {
+            ViewBag.Id = utilizador.Id;
             ViewBag.Funcao = utilizador.Funcao;
             ViewBag.UserEsp = utilizador.Especializade;
             ViewBag.UserName = utilizador.Nome;

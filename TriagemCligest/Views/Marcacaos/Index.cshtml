@@ -76,10 +76,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Especialidade)
+                    @Html.DisplayFor(modelItem => item.Funcionario.Especialidade.Esp)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDCentro)
+                    @Html.DisplayFor(modelItem => item.Funcionario.NomeAbreviado)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IDutente)

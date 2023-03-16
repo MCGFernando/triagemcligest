@@ -2,9 +2,7 @@
 {
     public enum TipoTriagem : int
     {
-        CLINICA_GERAL = 0,
-        PEDIATRIA = 1,
-        OBSTETRICIA = 2,
-        GINECOLOGIA = 3
+        ELECTIVO = 1,
+        URGENCIA = 2
     }
 }

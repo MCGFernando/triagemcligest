@@ -10,10 +10,16 @@
     <h4>Triagem</h4>
     <hr />
     <div class="d-flex justify-content-between p-1">
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary ">Editar</a>
+
+        @if (Model.EstadoTriagem != EstadoTriagem.ANULADA)
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
+
+        }
+        
         @{
 
-            if (Model.EstadoTriagem == EstadoTriagem.ENCERRADA || ViewBag.Funcao == Funcao.OPERADOR)
+            if (Model.EstadoTriagem == EstadoTriagem.ENCERRADA || ViewBag.Funcao == Funcao.OPERADOR || Model.EstadoTriagem == EstadoTriagem.ANULADA)
             {
                 <button type="button" class="btn btn-primary disabled disabled-button" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
                     Encerrar
@@ -118,8 +124,8 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td>@Html.DisplayNameFor(model => model.TipoTriagem)</td>
-                        <td>@Html.DisplayFor(model => model.TipoTriagem)</td>
+                        <td>@Html.DisplayNameFor(model => model.TipoFichaAtendimento)</td>
+                        <td>@Html.DisplayFor(model => model.TipoFichaAtendimento)</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(model => model.SituacaoQueixa)</td>
@@ -146,16 +152,16 @@
                         <td>@Html.DisplayFor(model => model.FrequeciaRespiratoria)</td>
                     </tr>
                     @{
-                        if (Model.TipoTriagem == TriagemCligest.Models.Enum.TipoTriagem.CLINICA_GERAL)
+                        if (Model.TipoFichaAtendimento == TriagemCligest.Models.Enum.TipoFichaAtendimento.CLINICA_GERAL)
                         {
 
                             <partial name="_TriagemClinicaGeralDetailsPartial" class="tipo-triagem" data-tipo="0" model="Model" />
                         }
-                        else if (Model.TipoTriagem == TriagemCligest.Models.Enum.TipoTriagem.PEDIATRIA)
+                        else if (Model.TipoFichaAtendimento == TriagemCligest.Models.Enum.TipoFichaAtendimento.PEDIATRIA)
                         {
                             <partial name="_TriagemPediatriaDetailsPartial" class="tipo-triagem" data-tipo="1" model="Model" />
                         }
-                        else if (Model.TipoTriagem == TriagemCligest.Models.Enum.TipoTriagem.GINECOLOGIA)
+                        else if (Model.TipoFichaAtendimento == TriagemCligest.Models.Enum.TipoFichaAtendimento.GINECOLOGIA)
                         {
                             <partial name="_TriagemGinecologiaDetailsPartial" class="tipo-triagem" data-tipo="2" model="Model" />
                         }
@@ -173,7 +179,12 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a> |
+    @if (Model.EstadoTriagem != EstadoTriagem.ANULADA)
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
+
+    }
+    
     <a asp-action="Index">Voltar para listagem</a>
 </div>
 

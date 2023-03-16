@@ -14,6 +14,14 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdOriginal" />
+            <input type="hidden" asp-for="EspecialidadeID" value="" />
+            <input type="hidden" asp-for="RegistadoPor" />
+            <input type="hidden" asp-for="EstadoTriagem" />
+            <input type="hidden" asp-for="DataActualizacao" value="@DateTime.Now" />
+            <input type="hidden" asp-for="DataRegisto"  />
+            <input type="hidden" asp-for="Accao" value="@Accao.UPDATE" />
+            <input type="hidden" asp-for="ActualizadoPor" value="@ViewBag.Id" />
             <div class="cabecalho-container">
                 <div class="form-group">
                     <input type="hidden" asp-for="MarcacaoID" class="form-control" />
@@ -39,9 +47,9 @@
                     </div>
                     <div class="col-2">
                         <div class="form-group">
-                            <label asp-for="TipoTriagem" class="control-label"></label>
-                            <select asp-for="TipoTriagem" asp-items="Html.GetEnumSelectList<TipoTriagem>()" class="form-control" id="tipoTriagem" required></select>
-                            <span asp-validation-for="TipoTriagem" class="text-danger"></span>
+                            <label asp-for="TipoFichaAtendimento" class="control-label"></label>
+                            <select asp-for="TipoFichaAtendimento" asp-items="Html.GetEnumSelectList<TipoFichaAtendimento>()" class="form-control" id="tipoFichaAtendimento" required></select>
+                            <span asp-validation-for="TipoFichaAtendimento" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -170,10 +178,7 @@
                     <select asp-for="ClassificacaoTriagem" asp-items="Html.GetEnumSelectList<ClassificacaoTriagem>()" class="form-control"></select>
                     <span asp-validation-for="ClassificacaoTriagem" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="hidden" asp-for="EstadoTriagem" value="@EstadoTriagem.REALIZADA" class="form-control" />
-                    <span asp-validation-for="EstadoTriagem" class="text-danger"></span>
-                </div>
+                
             
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
@@ -191,17 +196,17 @@
 }
 <script>
     $(function () {
-        ValidaTipoTriagem()
+        ValidaTipoFichaAtendimento()
         $('#descricaoPatologia').prop('disabled', true)
-        $('#tipoTriagem').on('change', function () {
+        $('#tipoFichaAtendimento').on('change', function () {
             ValidaTipoTriagem()
         })
     });
 
-    function ValidaTipoTriagem() {
+    function ValidaTipoFichaAtendimento() {
         $('.tipo-triagem').each(function () {
             $(this).hide()
-            if ($('#tipoTriagem').val() == $(this).data("tipo")) {
+            if ($('#tipoFichaAtendimento').val() == $(this).data("tipo")) {
                 $(this).show()
             }
         })

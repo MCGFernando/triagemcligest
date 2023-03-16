@@ -32,58 +32,55 @@ namespace TriagemCligest.Controllers
         }
 
         // GET: Triagems
-        public async Task<IActionResult> Index(string? Pesquisar, int page=1)
+        public async Task<IActionResult> Index(string? Pesquisar, int page = 1)
         {
             List<Triagem> lstTriagem = new List<Triagem>();
-
-            Console.WriteLine("search " + Pesquisar);
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             if (Pesquisar != null)
             {
                 lstTriagem = _contextTriagem.FindBySearch(Pesquisar);
             }
             else
             {
-                /*var queryTriagem = from t in _context.Triagem.ToList() select t;
-                var queryUtente = from u in _contextUtente.FindAll() select u;*/
-                var result = from a in _context.Triagem.ToList() join b in _contextUtente.FindAll() on a.UtenteID equals b.ID select new { a, b };
-                foreach (var item in result)
-                {
-                    Triagem triagem = item.a;
-                    triagem.Utente = item.b;
-                    lstTriagem.Add(triagem);
-                }
+
+                lstTriagem = _contextTriagem.FindAll();
+
             }
-            
+
             const int paginaTamanho = 10;
-            if (page < 1) page= 1;
+            if (page < 1) page = 1;
             int recordCount = lstTriagem.Count();
             var pager = new Pager(recordCount, page, paginaTamanho);
             int recordSkip = (page - 1) * paginaTamanho;
             var data = lstTriagem.Skip(recordSkip).Take(pager.PaginaTamanho).ToList();
             this.ViewBag.Pager = pager;
 
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
 
             return View(data);
         }
 
-       /* public async Task<IActionResult> GroupingSearch(string? search)
-        {
-            if (search == null) return RedirectToAction(nameof(Index));
+        /* public async Task<IActionResult> GroupingSearch(string? search)
+         {
+             if (search == null) return RedirectToAction(nameof(Index));
 
 
-            List<Triagem> lstTriagem = _contextTriagem.FindBySearch(search);
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
-            return View(lstTriagem);
-        }*/
+             List<Triagem> lstTriagem = _contextTriagem.FindBySearch(search);
+             var utilizador = GetObjectFromSession();
+             if (utilizador == null) return RedirectToAction("Index", "Logins");
+             SetViewBags(utilizador);
+             return View(lstTriagem);
+         }*/
 
         // GET: Triagems/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+
             if (id == null || _context.Triagem == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não definido" });
@@ -104,24 +101,33 @@ namespace TriagemCligest.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
             }
             triagem.Utente = result.Select(x => x.b).FirstOrDefault();
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
             return View(triagem);
         }
 
         // GET: Triagems/Create
         public IActionResult Create(int? id)
         {
-            if (TempData["IdUtente"] == null && id == null) return View();
-            var utenteID = TempData["IdUtente"] == null ? id.Value : (int)TempData["IdUtente"];
-            var marcacaoID = TempData["IdUtente"] == null ? 1 : (int)TempData["IdMarcacao"];
-            var utente = _contextUtente.FindById(utenteID);
-
-            Triagem triagem = new() { Utente = utente, MarcacaoID = marcacaoID };
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
             SetViewBags(utilizador);
+
+            if (TempData["IdUtente"] == null && id == null)
+            {
+                Console.WriteLine("_contextTriagem.FindEntidadeAssistidaAll()" + _contextTriagem.FindEntidadeAssistidaAll().Count());
+                ViewBag.Entidade = new SelectList(_contextTriagem.FindEntidadeAssistidaAll(), "Id", "Entidade");
+                return View();
+            }
+            var utenteID = TempData["IdUtente"] == null ? id.Value : (int)TempData["IdUtente"];
+            var marcacaoID = TempData["IdUtente"] == null ? 1 : (int)TempData["IdMarcacao"];
+            var tipoTriagem = TempData["IdUtente"] == null ? TipoTriagem.URGENCIA : TipoTriagem.ELECTIVO;
+            var utente = _contextUtente.FindById(utenteID);
+
+            Triagem triagem = new() { Utente = utente, MarcacaoID = marcacaoID, TipoTriagem = tipoTriagem };
+            ViewBag.Entidade = new SelectList(_contextTriagem.FindEntidadeAssistidaAll(), "Id", "Entidade");
+
+
+
             return View(triagem);
         }
 
@@ -132,25 +138,28 @@ namespace TriagemCligest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UtenteID,MarcacaoID,TipoTriagem,SituacaoQueixa,TensaoArterialSitolica,TensaoArterialDiastolica,Temperatura,ClassificacaoTemperatura,Peso,FrequeciaCardiaca,ClassificacaoFrequenciaCardiaca,FrequeciaRespiratoria,ClassificacaoFrequenciaRespiratoria,Patologia,DescricaoPatologia,Alergia,DescricaoAlergia,Medicamento,DescricaoMedicamento,ClassificacaoPeleMucosa,Ictericia,LesaoCutanea,ClassificacaoQueimadura,LocalQueimadura,Epistaxe,Cianose,Tosse,Expectoracao,ClassificacaoExpectoracao,SaturacaoOxigenio,LocalSianose,ClassificacaoGenitoUrinario,Metrorragia,Dismenorreia,SecrecaoUretralVaginal,Hematemese,Vomito,Melena,Enterorragia,Obstipacao,Diarreia,AtrasoMenstrual,Mioma,QuistosOvarios,CorrimentoVaginal,CaracteristicaCorrimentoVaginal,PruridoVaginal,Gravidez,MedicoAssistente,SemanaGravidez,ContracaoUterina,Hiperemese,Desidratacao,AbcessoMamario,IngurgitamentoMamario,DispneiaMusculaturaAcessoria,SangramentoNasal,FezesSangue,UrinaComSangue,DorMiccao,ClassificacaoColoracaoPele,ClassificacaoDiurese,DatarRgisto,HoraChegada,HoraAtendimentoMedico,HoraAcolhimento,ClassificacaoTriagem,EstadoTriagem")] Triagem triagem)
+        public async Task<IActionResult> Create(Triagem triagem)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(triagem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
-            ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
             SetViewBags(utilizador);
+
+            _contextTriagem.Insert(triagem);
+            return RedirectToAction(nameof(Index));
+
+            ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
+            ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
+
             return View(triagem);
         }
 
         // GET: Triagems/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+
             if (id == null || _context.Triagem == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não definido" });
@@ -167,9 +176,7 @@ namespace TriagemCligest.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo. O objecto retornou nulo" });
             }
             triagem.Utente = result.Select(x => x.b).FirstOrDefault();
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
             return View(triagem);
         }
 
@@ -178,38 +185,39 @@ namespace TriagemCligest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UtenteID,MarcacaoID,TipoTriagem,SituacaoQueixa,TensaoArterialSitolica,TensaoArterialDiastolica,Temperatura,ClassificacaoTemperatura,Peso,FrequeciaCardiaca,ClassificacaoFrequenciaCardiaca,FrequeciaRespiratoria,ClassificacaoFrequenciaRespiratoria,Patologia,DescricaoPatologia,Alergia,DescricaoAlergia,Medicamento,DescricaoMedicamento,ClassificacaoPeleMucosa,Ictericia,LesaoCutanea,ClassificacaoQueimadura,LocalQueimadura,Epistaxe,Cianose,Tosse,Expectoracao,ClassificacaoExpectoracao,SaturacaoOxigenio,LocalSianose,ClassificacaoGenitoUrinario,Metrorragia,Dismenorreia,SecrecaoUretralVaginal,Hematemese,Vomito,Melena,Enterorragia,Obstipacao,Diarreia,AtrasoMenstrual,Mioma,QuistosOvarios,CorrimentoVaginal,CaracteristicaCorrimentoVaginal,PruridoVaginal,Gravidez,MedicoAssistente,SemanaGravidez,ContracaoUterina,Hiperemese,Desidratacao,AbcessoMamario,IngurgitamentoMamario,DispneiaMusculaturaAcessoria,SangramentoNasal,FezesSangue,UrinaComSangue,DorMiccao,ClassificacaoColoracaoPele,ClassificacaoDiurese,DatarRgisto,HoraChegada,HoraAtendimentoMedico,HoraAcolhimento,ClassificacaoTriagem,EstadoTriagem")] Triagem triagem)
+        public async Task<IActionResult> Edit(int id, Triagem triagem)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+
             if (id != triagem.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(triagem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TriagemExists(triagem.Id))
-                    {
-                        return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _contextTriagem.Update(triagem);
+
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TriagemExists(triagem.Id))
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
             ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
             return View(triagem);
         }
 
@@ -217,11 +225,15 @@ namespace TriagemCligest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Encerrar(int id, [Bind("Id")] Triagem triagemView)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+
             if (id != triagemView.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
             }
-            var utilizador = GetObjectFromSession();
+
             if (utilizador.Funcao == Funcao.OPERADOR)
             {
                 return Unauthorized();
@@ -235,7 +247,7 @@ namespace TriagemCligest.Controllers
                 triagem.EstadoTriagem = Models.Enum.EstadoTriagem.ENCERRADA;
                 triagem.HoraAtendimentoMedico = DateTime.Now.TimeOfDay;
 
-                triagem.DatarActualizacao = DateTime.Today;
+                triagem.DataActualizacao = DateTime.Today;
 
                 _context.Update(triagem);
                 await _context.SaveChangesAsync();
@@ -255,31 +267,28 @@ namespace TriagemCligest.Controllers
             ViewData["MarcacaoID"] = new SelectList(_context.Set<Marcacao>(), "ID", "ID", triagem.MarcacaoID);
             ViewData["UtenteID"] = new SelectList(_context.Set<Utente>(), "ID", "ID", triagem.UtenteID);
             //await _context.SaveChangesAsync();
-            //var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
+
             return RedirectToAction(nameof(Index));
         }
 
         // GET: Triagems/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             if (id == null || _context.Triagem == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
             }
 
-            var triagem = await _context.Triagem
-                .Include(t => t.Marcacao)
-                .Include(t => t.Utente)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var triagem = _contextTriagem.FindById(id.Value);
             if (triagem == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrdo" });
             }
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
             return View(triagem);
         }
 
@@ -288,20 +297,23 @@ namespace TriagemCligest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
             if (_context.Triagem == null)
             {
                 return Problem("Entity set 'TriagemContext.Triagem'  is null.");
             }
             var triagem = await _context.Triagem.FindAsync(id);
+            triagem.AnuladoPor = utilizador.Id;
+            triagem.ActualizadoPor = utilizador.Id;
+
             if (triagem != null)
             {
-                _context.Triagem.Remove(triagem);
+                _contextTriagem.Delete(triagem);
             }
 
-            await _context.SaveChangesAsync();
-            var utilizador = GetObjectFromSession();
-            if (utilizador == null) return RedirectToAction("Index", "Logins");
-            SetViewBags(utilizador);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -329,6 +341,7 @@ namespace TriagemCligest.Controllers
         public void SetViewBags(Utilizador utilizador)
         {
             ViewBag.Funcao = utilizador.Funcao;
+            ViewBag.Id = utilizador.Id;
             ViewBag.UserEsp = utilizador.Especializade;
             ViewBag.UserName = utilizador.Nome;
         }

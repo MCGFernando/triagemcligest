@@ -22,7 +22,7 @@
                 <input type="text" class="form-control" name="Pesquisar" />
             </div>
             <div class="col-2">
-                <label class="form-label">Hora de Chegada</label>
+                <label class="form-label">Data Triagem</label>
                 <input type="date" class="form-control" />
             </div>
             <div class="col-2">
@@ -66,6 +66,9 @@
                 @Html.DisplayNameFor(model => model.HoraAcolhimento)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TipoTriagem)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ClassificacaoTriagem)
             </th>
             <th>
@@ -74,6 +77,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ClassificacaoUnidade)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataActualizacao)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -81,7 +87,8 @@
         @foreach (var item in Model)
         {
             ViewData["Color"] = item.EnumToColor(item.ClassificacaoTriagem);
-            <tr>
+            ViewData["RowColor"] = item.EstadoTriagem == EstadoTriagem.ANULADA ? "table-danger" : "";
+            <tr class=@ViewData["RowColor"]>
                 <td>
                     @Html.DisplayFor(modelItem => item.UtenteID)
                 </td>
@@ -98,6 +105,9 @@
                     @Html.DisplayFor(modelItem => item.HoraAcolhimento)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.TipoTriagem)
+                </td>
+                <td>
                     <div style="background-color:@ViewData["Color"]; border-radius: 50%; width: 20px; height: 20px;"></div>
                 </td>
                 <td>
@@ -107,18 +117,22 @@
                     @Html.DisplayFor(modelItem => item.ClassificacaoUnidade)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.DataActualizacao)
+                </td>
+                <td>
                     <div class="dropdown dropdown-menu-end">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Editar</a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Detalhes</a>
-                            @{
-                                if (ViewBag.Funcao != Funcao.FUNCIONARIO)
-                                {
-                                    <!--< a asp - action = "Delete" asp - route - id = "@item.Id" class="dropdown-item">Remover</a>
-                                    -->
-                                }
+                            @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Editar</a>
                             }
+                            <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Detalhes</a>
+                            @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Anular</a>
+                            }
+
                         </div>
                     </div>
                 </td>
@@ -138,7 +152,7 @@
 
             @for (var pge = pager.PaginaInicio; pge <= pager.PaginaFim; pge++)
             {
-                <li class="page-item @(pge==pager.PaginaAtual ? "active" : "")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@pge" >@pge</a></li>
+                <li class="page-item @(pge==pager.PaginaAtual ? "active" : "")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@pge">@pge</a></li>
             }
 
 
