@@ -26,6 +26,17 @@ namespace TriagemCligest.Controllers
               return View(_context.FindAll());
         }
 
-        
+        public ActionResult<IEnumerable<Funcionario>> FindBySearch(string search)
+        {
+            return _context.FindBySearch(search);
+        }
+
+        public ActionResult<Funcionario> GetFromID(int? id)
+        {
+            Console.WriteLine("ID FuncionarioController " + id);
+            return Json( _context.FindById(id.Value));
+        }
+
+
     }
 }

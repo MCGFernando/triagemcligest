@@ -31,7 +31,7 @@ namespace TriagemCligest.Service
                     Id = operador.ID,
                     Nome = "Enf(a). " + operador.UserName,
                     Senha = operador.Password,
-                    Funcao = Models.Enum.Funcao.OPERADOR,
+                    Funcao = operador.AccessLevel== 1000? Models.Enum.Funcao.ADMIN : Models.Enum.Funcao.OPERADOR,
                     IdEspecializade = -1,
                     Especializade = "Enfemeiro",
                 };

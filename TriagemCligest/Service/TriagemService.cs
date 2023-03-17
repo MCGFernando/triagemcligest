@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using NuGet.Protocol.Plugins;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using TriagemCligest.Data;
 using TriagemCligest.Models;
 using TriagemCligest.Models.Enum;
@@ -91,18 +92,43 @@ namespace TriagemCligest.Service
             return triagem;
         }
 
+        public List<Triagem> FindByVersionId(int id)
+        {
+
+            var result = from a in _context.Triagem.ToList() join b in _contextU.Utente.ToList() on a.UtenteID equals b.ID where a.IdOriginal == id select new { a, b };
+            List<Triagem> lstTriagem = new List<Triagem>();
+            foreach (var item in result)
+            {
+                Triagem triagem = item.a;
+                triagem.Utente = item.b;
+                lstTriagem.Add(triagem);
+            }
+            return lstTriagem;
+        }
+
         public List<EntidadeAssistida> FindEntidadeAssistidaAll()
         {
             return _contextMain.EntidadeAssistida.Take(5). ToList();
         }
+
+        /*public Funcionario FindById(int id)
+        {
+            if (!FuncionarioExists(id)) { return null; }
+            return _context.Funcionario.FirstOrDefault(e => e.ID == id);
+        }*/
         public void Insert(Triagem triagem)
         {
+            InsertFE(triagem);  
             triagem.DataRegisto  = DateTime.Now;
             _context.Add(triagem);
             _context.SaveChanges();
             triagem.IdOriginal = triagem.Id;
             _context.Update(triagem);
             _context.SaveChanges();
+            if(triagem.TipoTriagem == TipoTriagem.URGENCIA)
+            {
+                InsertFE(triagem);
+            }
         }
         public void Update(Triagem triagem)
         {
@@ -119,6 +145,7 @@ namespace TriagemCligest.Service
                     MarcacaoID = triagem.MarcacaoID,
                     TipoFichaAtendimento = triagem.TipoFichaAtendimento,
                     Accao = Models.Enum.Accao.UPDATE,
+                    FuncionarioID= triagem.FuncionarioID,
                     TipoTriagem = triagem.TipoTriagem,
                     EscalaDor = triagem.EscalaDor,
                     IdOriginal = triagem.IdOriginal,
@@ -220,6 +247,7 @@ namespace TriagemCligest.Service
                     TipoFichaAtendimento = triagem.TipoFichaAtendimento,
                     Accao = Models.Enum.Accao.DELETE,
                     TipoTriagem = triagem.TipoTriagem,
+                    FuncionarioID= triagem.FuncionarioID,
                     EscalaDor = triagem.EscalaDor,
                     IdOriginal = triagem.IdOriginal,
                     EspecialidadeID = triagem.EspecialidadeID,
@@ -308,30 +336,46 @@ namespace TriagemCligest.Service
         { 
         
         }
-            public void InsertFE(Triagem triagem)
+            public void InsertFE(Triagem tri)
         {
-            /*var entidade = _contextMain.EntidadeAssistida.FirstOrDefault(e => e.Id== triagem.EntidadeAssistidaID);
+            var triagem = FindById(tri.Id);
+
+            FE fe = new FE();
+            
+            var entidade = _contextMain.EntidadeAssistida.FirstOrDefault(e => e.Id== triagem.EntidadeAssistidaID);
+            
             var preco = entidade.IdPrecario;
-            var IDFuncionario = triagem.ActualizadoPor;
-            var IDTipodeDocumento = 100;
-            var Estado = 1;
-            var Autorizacao = triagem.Utente.IDUtenteExterno;
-            var Cambio = 420;
-            var IDEntidade = entidade.Id;
-            var Entidade = entidade.Entidade;
-            var DefaultUtente = triagem.Utente.Nome;
-            var DefaultEXT = triagem.Utente.ID;
-            var DatadeEntrada = DateTime.Now;
-            var DefaultCoef = 1;
-            var DatadeSaida = DateTime.Now;
-            var DefaultData = DateTime.Now;
-            var Centroderesponsabilidade;
-            var Precario = preco;
-            var Data = DateTime.Now;
-            var Hora = DateTime.Now;
-            var DefaultArea = 1;
-            var IDFuncionarioLast = triagem.ActualizadoPor;
-            var Marcacao = triagem.MarcacaoID;*/
+            Console.WriteLine("preco " + preco);
+            fe.Idfuncionario = triagem.ActualizadoPor;           
+            fe.IdTipodeDocumento = 100;
+            fe.Estado = 1;
+            //fe.Autorizacao = triagem.Utente.IDUtenteExterno;
+            fe.Cambio = 420;
+            fe.IdEntidade = entidade.Id;
+            fe.Entidade = entidade.Entidade;
+            fe.DefaultUtente = triagem.Utente.Nome;
+            //fe.DefaultEXT = triagem.Utente.ID;
+            fe.DataDeEntrada = DateTime.Now;
+            fe.DefaultCoef = 1;
+            fe.DataDeSaida = DateTime.Now;
+            fe.DefaultData = DateTime.Now;
+            fe.CentroDeResponsabilidade = "Gil Ferreira";
+            fe.Precario = preco;
+            fe.Data = DateTime.Now;
+            fe.Hora = DateTime.Now;
+            fe.DefaultArea = 1;
+            fe.IdFuncionarioLast = triagem.ActualizadoPor;
+            fe.Marcacao = triagem.MarcacaoID;
+            Console.WriteLine("fe.IdFuncionarioLast " + fe.IdFuncionarioLast);
+
+            //var prefixo = _contextSI.g
+
+            var contador = _contextMain.Contador.Where(c => c.Id == 100).Select(c => c.Valor);
+            //fe.NdeProcesso = "" + (contador + 1) ;
+
+            var idFELast = _contextSI.FE.ToList().Max(f => f.Id) ;
+            fe.Id = (idFELast + 1); 
+            Console.WriteLine("idFELast " + idFELast);
         }
     }
 }

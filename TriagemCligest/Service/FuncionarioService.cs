@@ -16,6 +16,14 @@ namespace TriagemCligest.Service
         {
             return _context.Funcionario.ToList();
         }
+
+        public List<Funcionario> FindBySearch(string search)
+        {
+            return _context.Funcionario.Where(f => f.NomeAbreviado.Contains(search))
+                .Skip(10).Take(10)
+                .ToList();
+        }
+
         public Funcionario FindById(int id)
         {
             if (!FuncionarioExists(id)) { return null; }

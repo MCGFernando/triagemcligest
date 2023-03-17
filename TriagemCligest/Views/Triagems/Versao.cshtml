@@ -14,7 +14,7 @@
 
 <h1>@ViewData["Title"]</h1>
 <hr />
-<div class="row">
+<!--<div class="row">
     <form asp-action="Index">
         <div class="row d-flex align-items-end">
             <div class="col-4">
@@ -42,7 +42,7 @@
     </form>
 
 </div>
-<hr />
+<hr />-->
 <p>
     <a asp-action="Create" class="btn btn-primary">Criar Nova</a>
 </p>
@@ -123,23 +123,7 @@
                     <div class="dropdown dropdown-menu-end">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu">
-                            @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Editar</a>
-                            }
                             <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Detalhes</a>
-                            @if (ViewBag.Funcao != Funcao.FUNCIONARIO)
-                            {
-                                @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
-                                {
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Anular</a>
-                                }
-                            }
-
-                            @if(ViewBag.Funcao == Funcao.ADMIN)
-                            {
-                                <a asp-action="Versao" asp-route-id="@item.IdOriginal" class="dropdown-item">Versão</a>
-                            }
                         </div>
                     </div>
                 </td>
@@ -152,21 +136,12 @@
     @if (pager.PaginasTotal > 0)
     {
         <ul class="pagination">
-
             <li class="page-item @( pager.PaginaAtual > 1 ? "" : "disabled")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@(pager.PaginaAtual - 1)">Anterior</a></li>
-
-
-
             @for (var pge = pager.PaginaInicio; pge <= pager.PaginaFim; pge++)
             {
                 <li class="page-item @(pge==pager.PaginaAtual ? "active" : "")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@pge">@pge</a></li>
             }
-
-
             <li class="page-item @(pager.PaginaAtual < pager.PaginasTotal?"":"disabled")"><a class="page-link" asp-controller="Triagems" asp-action="Index" asp-route-page="@(pager.PaginaAtual + 1)">Próximo</a></li>
-
-
         </ul>
     }
-
 </nav>

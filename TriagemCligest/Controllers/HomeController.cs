@@ -24,6 +24,13 @@ namespace TriagemCligest.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            var utilizador = GetObjectFromSession();
+            if (utilizador == null) return RedirectToAction("Index", "Logins");
+            SetViewBags(utilizador);
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

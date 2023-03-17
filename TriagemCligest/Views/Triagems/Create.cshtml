@@ -77,15 +77,16 @@
                     </div>
                 </div>
             </div>
-            @if (Model!=null && Model.TipoTriagem == TipoTriagem.URGENCIA)
+            @if (Model != null && Model.TipoTriagem == TipoTriagem.URGENCIA)
             {
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label class="control-label">Nome do Médico</label>
-                            <input type="text" class="form-control" onkeyup="javascript:search(this.value)" id="nome" />
+                            <input type="hidden" asp-for="FuncionarioID"/>
+                            <input type="text" name="funcionario" class="form-control" id="search-medico" onkeyup="javascript:searchMedico(this.value)" required />
                             <span id="resultado-medico" style="position:absolute">
-                                <div class="list-group seach-list-group" id="seach-list-group" style="position:relative; z-index:1; display:none">
+                                <div class="list-group seach-list-group" id="search-medico-list-group" style="position:relative; z-index:1; display:none">
                                 </div>
                             </span>
                         </div>
@@ -94,7 +95,7 @@
                         <div class="form-group">
                             <label asp-for="EntidadeAssistidaID" class="control-label"></label>
 
-                            <select asp-for="EntidadeAssistidaID" asp-items=@ViewBag.Entidade class="form-control"></select>
+                            <select asp-for="EntidadeAssistidaID" asp-items=@ViewBag.Entidade class="form-control" required></select>
 
                             <span asp-validation-for="EntidadeAssistidaID" class="text-danger"></span>
                         </div>
@@ -366,30 +367,38 @@
             if (event.target.matches('.list-group-item-action')) {
                 const dataId = event.target.getAttribute('data-idUtente');
                 window.location.assign('/Triagems/Create?id=' + dataId)
-                /*$.get('Triagems/CreateFromNull?id=' + dataId, function (response, status) {
-                    $('#seach-list-group').hide()
-                })*/
 
-                /*$.get("/Utentes/GetFromID?id=" + dataId, function(response, status){
-                    console.log("response", response)
-                    $("#id").val(response['id'])
-                    $("#nome").val(response['nome'])
-                    $("#nascimento").val(calculateAge(new Date(response['dataNascimento'])))
-                    $('#seach-list-group').hide()
-                })*/
-
-
-                /*return fetch("/Utentes/GetFromID?id=" + dataId)
-                    .then(res => res.json())
-                    .then(data => {
-                        $("#id").val(data['id'])
-                        $("#nome").val(data['nome'])
-                        $("#nascimento").val(calculateAge(new Date(data['dataNascimento'])))
-                        $('#seach-list-group').hide()
-                    }).catch(err => console.log(err))*/
             }
         })
+
+
+
+
     });
+
+
+    document.getElementById('resultado-medico').addEventListener('click', function (event) {
+        event.preventDefault()
+        var id = event.target.getAttribute('data-idMedico');
+        //var newValue = $('#new-value').val();
+        console.log('ID Medico', id)
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetFromID", "Funcionarios")',
+            data: { id: id },
+            success: function (data) {
+                $('input[name="FuncionarioID"]').val(data.id);
+                var htmlElement = $('input[name="FuncionarioID"]').next()
+                htmlElement.val(data.id)
+                $('input[name="funcionario"]').val(data.nomeAbreviado);
+            },
+            error: function (err) {
+                console.log('Erro', err)
+            }
+        });
+        $('#search-medico-list-group').hide();
+    })
+
 
     function ValidaTipoTriagem() {
         $('.tipo-triagem').each(function () {
@@ -412,10 +421,48 @@
             }).catch(err => console.log(err))
     }
 
+    function searchMedico(input) {
+        return fetch("/Funcionarios/FindBySearch?search=" + input)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                let html = ''
+                $('#search-medico-list-group').show()
+                for (let i = 0; i < data.length; i++) {
+                    html += '<a href="#" class="list-group-item list-group-item-action" data-idMedico=\'' + data[i].id + '\'>' + data[i].nomeAbreviado + '</a>'
+                }
+
+                $('#search-medico-list-group').html(html)
+            }).catch(err => console.log(err))
+    }
+
     function calculateAge(birthday) {
         var ageDifMs = Date.now() - birthday.getTime();
         var ageDate = new Date(ageDifMs);
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
+                /*$.get('Triagems/CreateFromNull?id=' + dataId, function (response, status) {
+        $('#seach-list-group').hide()
+    })*/
 
+    /*$.get("/Utentes/GetFromID?id=" + dataId, function(response, status){
+        console.log("response", response)
+        $("#id").val(response['id'])
+        $("#nome").val(response['nome'])
+        $("#nascimento").val(calculateAge(new Date(response['dataNascimento'])))
+        $('#seach-list-group').hide()
+    })*/
+
+
+    /*return fetch("/Utentes/GetFromID?id=" + dataId)
+        .then(res => res.json())
+        .then(data => {
+            $("#id").val(data['id'])
+            $("#nome").val(data['nome'])
+            $("#nascimento").val(calculateAge(new Date(data['dataNascimento'])))
+            $('#seach-list-group').hide()
+        }).catch(err => console.log(err))*/
 </script>
+
+
+

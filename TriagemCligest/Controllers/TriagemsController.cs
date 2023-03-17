@@ -57,25 +57,29 @@ namespace TriagemCligest.Controllers
             var data = lstTriagem.Skip(recordSkip).Take(pager.PaginaTamanho).ToList();
             this.ViewBag.Pager = pager;
 
-
-
             return View(data);
         }
 
-        /* public async Task<IActionResult> GroupingSearch(string? search)
-         {
-             if (search == null) return RedirectToAction(nameof(Index));
+        public async Task<IActionResult> Versao(int id)
+        {
+            List<Triagem> lstTriagem = new List<Triagem>();
+            lstTriagem = _contextTriagem.FindByVersionId(id);
+            return View(lstTriagem);
+        }
+            /* public async Task<IActionResult> GroupingSearch(string? search)
+             {
+                 if (search == null) return RedirectToAction(nameof(Index));
 
 
-             List<Triagem> lstTriagem = _contextTriagem.FindBySearch(search);
-             var utilizador = GetObjectFromSession();
-             if (utilizador == null) return RedirectToAction("Index", "Logins");
-             SetViewBags(utilizador);
-             return View(lstTriagem);
-         }*/
+                 List<Triagem> lstTriagem = _contextTriagem.FindBySearch(search);
+                 var utilizador = GetObjectFromSession();
+                 if (utilizador == null) return RedirectToAction("Index", "Logins");
+                 SetViewBags(utilizador);
+                 return View(lstTriagem);
+             }*/
 
-        // GET: Triagems/Details/5
-        public async Task<IActionResult> Details(int? id)
+            // GET: Triagems/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             var utilizador = GetObjectFromSession();
             if (utilizador == null) return RedirectToAction("Index", "Logins");
@@ -121,9 +125,15 @@ namespace TriagemCligest.Controllers
             var utenteID = TempData["IdUtente"] == null ? id.Value : (int)TempData["IdUtente"];
             var marcacaoID = TempData["IdUtente"] == null ? 1 : (int)TempData["IdMarcacao"];
             var tipoTriagem = TempData["IdUtente"] == null ? TipoTriagem.URGENCIA : TipoTriagem.ELECTIVO;
+            
             var utente = _contextUtente.FindById(utenteID);
 
-            Triagem triagem = new() { Utente = utente, MarcacaoID = marcacaoID, TipoTriagem = tipoTriagem };
+            Triagem triagem = new() { 
+                Utente = utente, 
+                MarcacaoID = marcacaoID, 
+                TipoTriagem = tipoTriagem 
+            };
+
             ViewBag.Entidade = new SelectList(_contextTriagem.FindEntidadeAssistidaAll(), "Id", "Entidade");
 
 

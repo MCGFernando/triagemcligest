@@ -26,7 +26,8 @@ namespace TriagemCligest.Models
         public int IdOriginal { get; set; } = 0;
         public int? EspecialidadeID { get; set; }
         public EntidadeAssistida? EntidadeAssistida { get; set; }
-        public int? FunicionarioID { get; set; }
+        public int? FuncionarioID { get; set; }
+        public Funcionario? Funcionario { get; set; }
         public int EntidadeAssistidaID { get; set; }
         public int RegistadoPor { get; set; }
         public int ActualizadoPor { get; set; }
