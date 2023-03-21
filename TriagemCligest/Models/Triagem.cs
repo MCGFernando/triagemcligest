@@ -6,6 +6,7 @@ using TriagemCligest.Models.Enum;
 
 namespace TriagemCligest.Models
 {
+    [Serializable]
     public class Triagem
     {
         public int Id { get; set; }

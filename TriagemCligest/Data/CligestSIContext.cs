@@ -17,5 +17,7 @@ namespace TriagemCligest.Data
         public DbSet<Marcacao> Marcacao { get; set; } = default!;
 
         public DbSet<TriagemCligest.Models.FE>? FE { get; set; }
+        public DbSet<TriagemCligest.Models.GlobalVar>? GlobalVar { get; set; }
+
     }
 }
