@@ -16,8 +16,8 @@ namespace TriagemCligest.Service
         }
         public List<Marcacao> FindAll()
         {
-            var result = from obj in _context.Marcacao.ToList() join f in _contextMain.Funcionario.ToList() on obj.FuncionarioID equals f.ID join e in _contextMain.Especialidade.ToList() on f.EspecialidadeId equals e.Id
-                        where obj.Datam == DateTime.Today
+            var result = from obj in _context.Marcacao.Where(m => m.Datam == DateTime.Today).ToList() 
+                         join f in _contextMain.Funcionario.ToList() on obj.FuncionarioID equals f.ID join e in _contextMain.Especialidade.ToList() on f.EspecialidadeId equals e.Id
                          select new { obj, f };
             //result = result.Where(m => m.Datam == DateTime.Today);
             List < Marcacao > lstMarcacao = new List<Marcacao>();   
@@ -40,10 +40,10 @@ namespace TriagemCligest.Service
         {
             //var result = from obj in _context.Marcacao select obj;
             //result = result.Where(m => m.Datam == DateTime.Today && m.Utente.Contains(Pesquisar));
-            var result = from obj in _context.Marcacao.ToList()
+            var result = from obj in _context.Marcacao.Where(m => m.Datam == DateTime.Today && m.Utente.Contains(Pesquisar)).ToList()
                          join f in _contextMain.Funcionario.ToList() on obj.FuncionarioID equals f.ID
                          join e in _contextMain.Especialidade.ToList() on f.EspecialidadeId equals e.Id
-                         where obj.Datam == DateTime.Today && obj.Utente.Contains(Pesquisar)
+                         //where obj.Datam == DateTime.Today && obj.Utente.Contains(Pesquisar)
                          select new { obj, f };
             //result = result.Where(m => m.Datam == DateTime.Today);
             List<Marcacao> lstMarcacao = new List<Marcacao>();

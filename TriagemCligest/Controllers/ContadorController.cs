@@ -12,9 +12,9 @@ namespace TriagemCligest.Controllers
 {
     public class ContadorController : Controller
     {
-        private readonly CligestMainContext _context;
+        private readonly CligestSIContext _context;
 
-        public ContadorController(CligestMainContext context)
+        public ContadorController(CligestSIContext context)
         {
             _context = context;
         }

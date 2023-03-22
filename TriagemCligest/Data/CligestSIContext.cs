@@ -18,6 +18,7 @@ namespace TriagemCligest.Data
 
         public DbSet<TriagemCligest.Models.FE>? FE { get; set; }
         public DbSet<TriagemCligest.Models.GlobalVar>? GlobalVar { get; set; }
+        public DbSet<TriagemCligest.Models.Contador>? Contador { get; set; }
 
     }
 }

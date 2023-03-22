@@ -31,8 +31,8 @@
                         else
                         {
                             <input asp-for="UtenteID" class="form-control" value=@Model.Utente.ID readonly required />
-                            <input type="hidden" asp-for="EspecialidadeID" value="" />
-                            <!--<input type="hidden" asp-for="FunicionarioID" value="" />-->
+                            <!--<input type="hidden" asp-for="EspecialidadeID" value="" />
+                            <input type="hidden" asp-for="FunicionarioID" value="" />-->
                         }
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     {
                         <div class="form-group">
                             <label asp-for="Utente.Nome" class="control-label">Nome do Utente</label>
-                            <input asp-for="Utente.Nome" class="form-control" onkeyup="javascript:search(this.value)" id="nome" />
+                            <input asp-for="Utente.Nome" class="form-control" onkeyup="javascript:search(this.value)" id="nome" autocomplete="off" />
                             <span id="resultado" style="position:absolute">
                                 <div class="list-group seach-list-group" id="seach-list-group" style="position:relative; z-index:1; display:none">
                                 </div>
@@ -84,8 +84,8 @@
                         <div class="form-group">
                             <label class="control-label">Nome do Médico</label>
                             <input type="hidden" asp-for="FuncionarioID"/>
-                            
-                            <input type="text" name="funcionario" class="form-control" id="search-medico" onkeyup="javascript:searchMedico(this.value)" required />
+
+                            <input type="text" name="funcionario" class="form-control" id="search-medico" onkeyup="javascript:searchMedico(this.value)" required autocomplete="off" />
                             <span id="resultado-medico" style="position:absolute">
                                 <div class="list-group seach-list-group" id="search-medico-list-group" style="position:relative; z-index:1; display:none">
                                 </div>

@@ -20,7 +20,7 @@ namespace TriagemCligest.Data
 
         public DbSet<Operador> Operador { get; set; }
 
-        public DbSet<TriagemCligest.Models.Contador>? Contador { get; set; }
+        
 
         public DbSet<TriagemCligest.Models.EntidadeAssistida>? EntidadeAssistida { get; set; }
     }

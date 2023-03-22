@@ -2,6 +2,7 @@
 
 namespace TriagemCligest.Models
 {
+    [Serializable]
     public class Utilizador
     {
         public int Id { get; set; }

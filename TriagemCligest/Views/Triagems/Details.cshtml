@@ -11,7 +11,7 @@
     <hr />
     <div class="d-flex justify-content-between p-1">
 
-        @if (Model.EstadoTriagem != EstadoTriagem.ANULADA)
+        @if (Model.EstadoTriagem == EstadoTriagem.REALIZADA)
         {
             <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
 
@@ -179,7 +179,7 @@
 </div>
 
 <div>
-    @if (Model.EstadoTriagem != EstadoTriagem.ANULADA)
+    @if (Model.EstadoTriagem == EstadoTriagem.REALIZADA)
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
 

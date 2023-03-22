@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient.Server;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using NuGet.Protocol.Plugins;
 using System.Collections.Generic;
@@ -129,7 +130,7 @@ namespace TriagemCligest.Service
             {
                 var tri = FindById(triagem.Id);
                 InsertMarcacao(tri);
-                InsertFE(triagem);
+               
             }
         }
         public void Update(Triagem triagem)
@@ -337,11 +338,13 @@ namespace TriagemCligest.Service
         public void InsertMarcacao(Triagem triagem)
         {
             Marcacao marcacao = new Marcacao();
+            var entidade = _contextMain.EntidadeAssistida.FirstOrDefault(e => e.Id == triagem.EntidadeAssistidaID);
             marcacao.FuncionarioID = triagem.FuncionarioID;
             marcacao.Tipo = 0;
             marcacao.IDutente = triagem.UtenteID;
             marcacao.Utente = triagem.Utente.Nome;
             marcacao.IDEntidade = triagem.EntidadeAssistidaID;
+            marcacao.CODEntidade = entidade.Sigla;
             marcacao.Datam = DateTime.Now.Date;
             marcacao.Data = DateTime.Now.Date;
             marcacao.Estado = "NÃO EXISTE";
@@ -354,11 +357,26 @@ namespace TriagemCligest.Service
             marcacao.Hora = DateTime.Now;
             var idMaxMarcacao = _contextSI.Marcacao.ToList().Max(m => m.ID);
             marcacao.ID = (idMaxMarcacao + 1);
-            _contextSI.Add(marcacao);
-            _contextSI.SaveChanges();
+
+            try
+            {
+                _contextSI.Add(marcacao);
+                _contextSI.SaveChanges();
+                InsertFE(triagem, marcacao);
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw new DbConcurrencyException("Aconteceu algum erro ao criar a triagem! Por favor, contacte o Administrador");
+
+            }
+           
         }
-        public void InsertFE(Triagem triagem)
+        public void InsertFE(Triagem triagem, Marcacao marcacao)
         {
+
+            
             FE fe = new FE();
             //if(triagem.EntidadeAssistidaID == 0)    
 
@@ -385,17 +403,25 @@ namespace TriagemCligest.Service
             fe.Hora = DateTime.Now;
             fe.DefaultArea = 1;
             fe.IdFuncionarioLast = triagem.ActualizadoPor;
-            fe.TipoDeEpisodio = "INTERNAMENTO";
-            fe.Marcacao = triagem.MarcacaoID;
+            fe.TipoDeEpisodio = "URGÊNCIA";
+            fe.Marcacao = marcacao.ID;
             Console.WriteLine("fe.IdFuncionarioLast " + fe.IdFuncionarioLast);
 
             
 
-            var contador = _contextMain.Contador.Where(c => c.Id == 100).Select(c => c.Valor);
-            //fe.NdeProcesso = "" + (contador + 1) ;
-            var idFELast = _contextSI.FE.ToList().Max(f => f.Id);
-            fe.Id = (idFELast + 1);
+            var contador = _contextSI.Contador.FirstOrDefault(c => c.Id == 100);
+            var index = (contador.Valor + 1);
+            var numProcesso = prefixo.FeCode + "" + index + "\\" + DateTime.Now.Year.ToString().Substring(4 - 2); ;
+            fe.NdeProcesso = numProcesso;
+
+            var idFELast = _contextSI.FE.ToList().Max(f => f.Id) + 1;
+            
+            fe.Id = idFELast ;
+
+           
+
             Console.WriteLine("idFELast " + idFELast);
+            Console.WriteLine("fe.NdeProcesso " + fe.NdeProcesso);
             Console.WriteLine("Idfuncionario " + fe.Idfuncionario);
             Console.WriteLine("IdTipodeDocumento " + fe.IdTipodeDocumento);
             Console.WriteLine("Estado " + fe.Estado);
@@ -417,6 +443,31 @@ namespace TriagemCligest.Service
             Console.WriteLine("DefaultArea " + fe.DefaultArea);
             Console.WriteLine("IdFuncionarioLast " + fe.IdFuncionarioLast);
             Console.WriteLine("Marcacao " + fe.Marcacao);
+
+            try
+            {
+                _contextSI.Add(fe);
+                _contextSI.SaveChanges();
+
+                contador.Valor = index;
+                marcacao.Estado = "EM CURSO";
+                marcacao.IDFE = idFELast;
+                marcacao.FichaEpisodio = numProcesso;
+                _contextSI.Update(contador);
+                _contextSI.Update(marcacao);
+                _contextSI.SaveChanges();
+
+
+                var tri = _context.Triagem.FirstOrDefault(t => t.Id == triagem.Id);
+                tri.MarcacaoID = marcacao.ID;
+                _context.Update(tri);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new DbConcurrencyException("Aconteceu algum erro ao criar a triagem! Por favor, contacte o Administrador");
+            }
+           
         }
     }
 }

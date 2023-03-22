@@ -258,8 +258,9 @@ namespace TriagemCligest.Controllers
                 triagem.HoraAtendimentoMedico = DateTime.Now.TimeOfDay;
 
                 triagem.DataActualizacao = DateTime.Today;
+                triagem.ActualizadoPor = utilizador.Id;
 
-                _context.Update(triagem);
+                _contextTriagem.Update(triagem);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

@@ -123,14 +123,14 @@
                     <div class="dropdown dropdown-menu-end">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu">
-                            @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
+                            @if (item.EstadoTriagem == EstadoTriagem.REALIZADA)
                             {
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Editar</a>
                             }
                             <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Detalhes</a>
                             @if (ViewBag.Funcao != Funcao.FUNCIONARIO)
                             {
-                                @if (item.EstadoTriagem != EstadoTriagem.ANULADA)
+                                @if (item.EstadoTriagem == EstadoTriagem.REALIZADA)
                                 {
                                     <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item">Anular</a>
                                 }

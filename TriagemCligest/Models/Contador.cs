@@ -6,7 +6,7 @@ namespace TriagemCligest.Models
     [Table("Contador")]
     public class Contador
     {
-        [Column("ID Ficha de Episódio")]
+        [Column("ID Contador")]
         public int Id { get; set; }
         [Column("Contador")]
         public string _Contador { get; set; }
