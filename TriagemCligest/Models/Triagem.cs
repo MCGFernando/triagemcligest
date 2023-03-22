@@ -11,8 +11,10 @@ namespace TriagemCligest.Models
     {
         public int Id { get; set; }
         public int UtenteID { get; set; }
+        [NotMapped]
+        public Utente? Utente { get; set; }
         public int Versao { get; set; } = 1;
-        public Utente? Utente { get; set;}
+        
         public int MarcacaoID { get; set; }
         public Marcacao? Marcacao { get; set; }
         [Display(Name = "Tipo de Ficha de Triagem")]

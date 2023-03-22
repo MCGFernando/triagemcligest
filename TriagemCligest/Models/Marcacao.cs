@@ -26,8 +26,9 @@ namespace TriagemCligest.Models
         [Column("ID entidade")]
         public int? IDEntidade { get;  set; }
         public string? Entidade { get;  set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime? Horam { get;  set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime? Datam { get;  set; }
         public bool? Encerrada { get;  set; }
         public int? Tipo { get;  set; }

@@ -420,7 +420,7 @@ namespace TriagemCligest.Service
 
            
 
-            Console.WriteLine("idFELast " + idFELast);
+            /*Console.WriteLine("idFELast " + idFELast);
             Console.WriteLine("fe.NdeProcesso " + fe.NdeProcesso);
             Console.WriteLine("Idfuncionario " + fe.Idfuncionario);
             Console.WriteLine("IdTipodeDocumento " + fe.IdTipodeDocumento);
@@ -442,7 +442,7 @@ namespace TriagemCligest.Service
             Console.WriteLine("Hora " + fe.Hora);
             Console.WriteLine("DefaultArea " + fe.DefaultArea);
             Console.WriteLine("IdFuncionarioLast " + fe.IdFuncionarioLast);
-            Console.WriteLine("Marcacao " + fe.Marcacao);
+            Console.WriteLine("Marcacao " + fe.Marcacao);*/
 
             try
             {
@@ -459,8 +459,10 @@ namespace TriagemCligest.Service
 
 
                 var tri = _context.Triagem.FirstOrDefault(t => t.Id == triagem.Id);
+                Console.WriteLine("Tiagem " + tri.UtenteID);
+                
                 tri.MarcacaoID = marcacao.ID;
-                _context.Update(tri);
+               _context.Update(tri);
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
