@@ -43,14 +43,15 @@ namespace TriagemCligest.Service
                                   UtenteID = grp.Key.UtenteID
                               };
 
-            var result = from t in resultGroup join a in _context.Triagem on t.Id equals a.Id join b in _contextU.Utente on a.UtenteID equals b.ID select new { a, b };
+            //var result = from t in resultGroup join a in _context.Triagem on t.Id equals a.Id 
+              //           join b in _contextU.Utente on a.UtenteID equals b.ID select new { a, b };
             //if (user.Funcao == Funcao.FUNCIONARIO) result = result.Where(r => r.a.Marcacao.FuncionarioID == user.Id);
 
             List<Triagem> lstTriagem = new List<Triagem>();
-            foreach (var item in result)
+            foreach (var item in resultGroup)
             {
-                Triagem triagem = item.a;
-                triagem.Utente = item.b;
+                Triagem triagem = _context.Triagem.FirstOrDefault(t => t.Id ==  item.Id);
+                triagem.Utente = _contextU.Utente.FirstOrDefault(u => u.ID == item.UtenteID);
                 lstTriagem.Add(triagem);
             }
 
@@ -70,13 +71,13 @@ namespace TriagemCligest.Service
                                   Versao = grp.Max(t => t.Versao),
                                   UtenteID = grp.Key.UtenteID
                               };
-            var result = from r in resultGroup join t in _context.Triagem.ToList() on r.Id equals t.Id join u in _contextU.Utente.ToList() on t.UtenteID equals u.ID where u.Nome.Contains(search) || u.ID == (int.TryParse(search, out idUtente) ? idUtente : 0) select new { t, u };
+            //var result = from r in resultGroup join t in _context.Triagem.ToList() on r.Id equals t.Id join u in _contextU.Utente.ToList() on t.UtenteID equals u.ID where u.Nome.Contains(search) || u.ID == (int.TryParse(search, out idUtente) ? idUtente : 0) select new { t, u };
 
             List<Triagem> lstTriagem = new List<Triagem>();
-            foreach (var item in result)
+            foreach (var item in resultGroup)
             {
-                Triagem triagem = item.t;
-                triagem.Utente = item.u;
+                Triagem triagem = _context.Triagem.FirstOrDefault(t => t.Id == item.Id);
+                triagem.Utente = _contextU.Utente.FirstOrDefault(u => u.ID == item.UtenteID);
                 lstTriagem.Add(triagem);
             }
 
@@ -86,22 +87,25 @@ namespace TriagemCligest.Service
         public Triagem FindById(int id)
         {
 
-            var result = from a in _context.Triagem.ToList() join b in _contextU.Utente.ToList() on a.UtenteID equals b.ID where a.Id == id select new { a, b };
-            //result = result.Where(qt => qt.a.Id == id.Value);
-            Triagem triagem = result.Select(x => x.a).FirstOrDefault();
-            triagem.Utente = result.Select(x => x.b).FirstOrDefault();
+            var tri = _context.Triagem.FirstOrDefault(t => t.Id == id);
+            var ute = _contextU.Utente.FirstOrDefault(u => u.ID == tri.UtenteID);
+           
+            Triagem triagem = tri;
+            triagem.Utente = ute;
             return triagem;
         }
 
         public List<Triagem> FindByVersionId(int id)
         {
+            var tri = _context.Triagem.Where(t => t.IdOriginal == id).ToList();
 
-            var result = from a in _context.Triagem.ToList() join b in _contextU.Utente.ToList() on a.UtenteID equals b.ID where a.IdOriginal == id select new { a, b };
+            
             List<Triagem> lstTriagem = new List<Triagem>();
-            foreach (var item in result)
+            foreach (var item in tri)
             {
-                Triagem triagem = item.a;
-                triagem.Utente = item.b;
+                var ute = _contextU.Utente.Where((u => u.ID == item.UtenteID)).SingleOrDefault();
+                Triagem triagem = item;
+                triagem.Utente = ute;
                 lstTriagem.Add(triagem);
             }
             return lstTriagem;
@@ -109,7 +113,7 @@ namespace TriagemCligest.Service
 
         public List<EntidadeAssistida> FindEntidadeAssistidaAll()
         {
-            return _contextMain.EntidadeAssistida.Take(5).ToList();
+            return _contextMain.EntidadeAssistida.Take(15).ToList();
         }
 
         /*public Funcionario FindById(int id)
@@ -119,7 +123,7 @@ namespace TriagemCligest.Service
         }*/
         public void Insert(Triagem triagem)
         {
-           
+
             triagem.DataRegisto = DateTime.Now;
             _context.Add(triagem);
             _context.SaveChanges();
@@ -130,7 +134,7 @@ namespace TriagemCligest.Service
             {
                 var tri = FindById(triagem.Id);
                 InsertMarcacao(tri);
-               
+
             }
         }
         public void Update(Triagem triagem)
@@ -355,7 +359,7 @@ namespace TriagemCligest.Service
             marcacao.Especialidade = triagem.EspecialidadeID;
             marcacao.Horam = DateTime.Now;
             marcacao.Hora = DateTime.Now;
-            var idMaxMarcacao = _contextSI.Marcacao.ToList().Max(m => m.ID);
+            var idMaxMarcacao = _contextSI.Marcacao.Max(m => m.ID); // aqui
             marcacao.ID = (idMaxMarcacao + 1);
 
             try
@@ -371,12 +375,12 @@ namespace TriagemCligest.Service
                 throw new DbConcurrencyException("Aconteceu algum erro ao criar a triagem! Por favor, contacte o Administrador");
 
             }
-           
+
         }
         public void InsertFE(Triagem triagem, Marcacao marcacao)
         {
 
-            
+
             FE fe = new FE();
             //if(triagem.EntidadeAssistidaID == 0)    
 
@@ -407,18 +411,18 @@ namespace TriagemCligest.Service
             fe.Marcacao = marcacao.ID;
             Console.WriteLine("fe.IdFuncionarioLast " + fe.IdFuncionarioLast);
 
-            
+
 
             var contador = _contextSI.Contador.FirstOrDefault(c => c.Id == 100);
             var index = (contador.Valor + 1);
             var numProcesso = prefixo.FeCode + "" + index + "\\" + DateTime.Now.Year.ToString().Substring(4 - 2); ;
             fe.NdeProcesso = numProcesso;
 
-            var idFELast = _contextSI.FE.ToList().Max(f => f.Id) + 1;
-            
-            fe.Id = idFELast ;
+            var idFELast = _contextSI.FE.Max(f => f.Id) + 1;
 
-           
+            fe.Id = idFELast;
+
+
 
             /*Console.WriteLine("idFELast " + idFELast);
             Console.WriteLine("fe.NdeProcesso " + fe.NdeProcesso);
@@ -460,16 +464,16 @@ namespace TriagemCligest.Service
 
                 var tri = _context.Triagem.FirstOrDefault(t => t.Id == triagem.Id);
                 Console.WriteLine("Tiagem " + tri.UtenteID);
-                
+
                 tri.MarcacaoID = marcacao.ID;
-               _context.Update(tri);
+                _context.Update(tri);
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw new DbConcurrencyException("Aconteceu algum erro ao criar a triagem! Por favor, contacte o Administrador");
             }
-           
+
         }
     }
 }
