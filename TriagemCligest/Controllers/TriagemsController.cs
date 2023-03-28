@@ -59,8 +59,11 @@ namespace TriagemCligest.Controllers
 
             return View(data);
         }
-
-        public async Task<IActionResult> Versao(int id)
+        public async Task<IActionResult> Search(string? Pesquisar)
+        {
+            return null;
+        }
+            public async Task<IActionResult> Versao(int id)
         {
             List<Triagem> lstTriagem = new List<Triagem>();
             lstTriagem = _contextTriagem.FindByVersionId(id);

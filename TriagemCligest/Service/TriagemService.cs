@@ -72,12 +72,16 @@ namespace TriagemCligest.Service
                                   UtenteID = grp.Key.UtenteID
                               };
             //var result = from r in resultGroup join t in _context.Triagem.ToList() on r.Id equals t.Id join u in _contextU.Utente.ToList() on t.UtenteID equals u.ID where u.Nome.Contains(search) || u.ID == (int.TryParse(search, out idUtente) ? idUtente : 0) select new { t, u };
+            var qryUtente = from u in _contextU.Utente.Where(u => u.Nome.Contains(search) || u.ID == (int.TryParse(search, out idUtente) ? idUtente : 0)).ToList() select u;
+            var qryTriagem = from r in resultGroup join t in _context.Triagem.ToList() on r.Id equals t.Id select t;
+            var result = from t in qryTriagem join u in qryUtente on t.UtenteID equals u.ID select new { t, u };
+
 
             List<Triagem> lstTriagem = new List<Triagem>();
-            foreach (var item in resultGroup)
+            foreach (var item in result)
             {
-                Triagem triagem = _context.Triagem.FirstOrDefault(t => t.Id == item.Id);
-                triagem.Utente = _contextU.Utente.FirstOrDefault(u => u.ID == item.UtenteID);
+                Triagem triagem = item.t;
+                triagem.Utente = item.u;
                 lstTriagem.Add(triagem);
             }
 
